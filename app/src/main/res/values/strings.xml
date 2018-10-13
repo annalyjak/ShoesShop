@@ -23,5 +23,8 @@
     <string name="answer3">Jeśli z jakiegoś powodu, kurier nie mógł dostarczyć przesyłki, dokona on jeszcze dwóch prób w najbliższych dniach roboczych. Do każdej z przesyłek dołączamy numer telefonu klienta, aby umożliwić kurierowi ustalenie szczegółów dostawy w takich przypadkach. Gdy jednak nie otrzymasz od nas zakupionej przesyłki, skontaktuj się z nami mailowo na: info@grace.pl lub telefonicznie pod: +48 22 222 22 22, a na pewno nasi konsultanci znajdą rozwiązanie.</string>
     <string name="answer4">Wszystkie złożone zamówienia docierają do klientów w przeciągu 24h od momentu przekazania paczki kurierowi.</string>
 
+    <string name="delivery_title">Opcje dostawy</string>
+    <string name="ok">OK</string>
+
 
 </resources>

@@ -25,7 +25,7 @@
     <item android:title="Informacje dodatkowe">
         <menu>
             <item
-                android:id="@+id/nav_regulamin"
+                android:id="@+id/nav_dostawa"
                 android:icon="@drawable/ic_menu_manage"
                 android:title="Koszty i opcje dostawy" />
             <item

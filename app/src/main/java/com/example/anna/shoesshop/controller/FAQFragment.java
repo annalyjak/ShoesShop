@@ -30,16 +30,15 @@ public class FAQFragment extends Fragment {
     }
 
     public static FAQFragment newInstance() {
-        FAQFragment fragment = new FAQFragment();
-        return fragment;
+        return new FAQFragment();
     }
 
     private void setTransitionsContainer(ViewGroup viewById) {
         transitionsContainer = viewById;
-        andswer1 = (TextView) Objects.requireNonNull(transitionsContainer).findViewById(R.id.textViewA1);
-        andswer2 = (TextView) Objects.requireNonNull(transitionsContainer).findViewById(R.id.textViewA2);
-        andswer3 = (TextView) Objects.requireNonNull(transitionsContainer).findViewById(R.id.textViewA3);
-        andswer4 = (TextView) Objects.requireNonNull(transitionsContainer).findViewById(R.id.textViewA4);
+        andswer1 = Objects.requireNonNull(transitionsContainer).findViewById(R.id.textViewA1);
+        andswer2 = Objects.requireNonNull(transitionsContainer).findViewById(R.id.textViewA2);
+        andswer3 = Objects.requireNonNull(transitionsContainer).findViewById(R.id.textViewA3);
+        andswer4 = Objects.requireNonNull(transitionsContainer).findViewById(R.id.textViewA4);
         andswer1.setVisibility(visibilityAndswer1? View.VISIBLE : View.GONE);
         andswer2.setVisibility(visibilityAndswer2? View.VISIBLE : View.GONE);
         andswer3.setVisibility(visibilityAndswer3? View.VISIBLE : View.GONE);

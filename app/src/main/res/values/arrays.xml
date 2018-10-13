@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="deliveryOptions">DPD, POCZTA POLSKA, POCZTA POLSKA - Odbiór w punkcie, Odbiór w sklepie</string-array>
+    <string-array name="deliveryContent">ZA POBRANIEM, ZA POBRANIEM, PŁATNOŚĆ W PUNKCIE, PŁATNOŚĆ W SKLEPIE</string-array>
+    <string-array name="deliveryCosts">17.99 zł, 17.99 zł, 17.99 zł, 0 zł</string-array>
+    <string-array name="deliveryTime"> 24 GODZINY, 48 GODZIN, 48 GODZIN, 24 GODZINY</string-array>
+</resources>
