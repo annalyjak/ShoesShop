@@ -7,6 +7,21 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="aboutUs">GRACE luxury boutique to wyjątkowe miejsce, w którym możesz śledzić trendy i rozwijać swój styl. To platforma sprzedażowa mobile, która oferuje modne obuwie damskie, męskie i dziecięce oraz odzież na każdą okazję i porę roku. W aplikacji odpowiadamy na długotrwałe potrzeby, spełniamy chwilowe zachcianki i podsuwamy ponadczasowe rozwiązania.</string>
+    <string name="aboutUs2">Dzięki nam nie tylko poznasz hity sezonu, ale też dowiesz się, jakie obuwie i ubrania są modne i dlaczego to, jak się nosisz ma znaczenie. Doceniamy indywidualizm i uważamy, że buty i ubrania to podstawa, dzięki której każdy może odnaleźć swój styl. Dlatego dostarczamy najświeższych inspiracji prosto z wybiegów, oferując obuwie i ubrania na każdą kieszeń. Zależy nam, abyś dzięki wybranym w Born2be szpilkom, trampkom, botkom i ubraniom mogła opowiedzieć swoją własną historię. Poznaj nasze bestsellery i trendy nowości z pierwszych stron magazynów modowych na całym świecie. Eleganckie czółenka, buty sportowe, czy typu slip on, ultra kobiece szpilki ombre, w wersji casual - wszystko na wyciągnięcie ręki i w konkurencyjnej cenie. Nasz sklep internetowy to skarbnica stylowych nowości. Dzięki GRACE masz możliwość szybkich i przemyślanych zakupów bez wychodzenia z domu. Sprawna obsługa i zwroty do wybranego przez Ciebie punktu Poczty Polskiej.</string>
+    <string name="aboutUs_title">O nas</string>
+
+    <string name="question1">Jak wybrać odpowiedni dla mnie rozmiar obuwia?</string>
+    <string name="question2">Ile mam czasu na zapłatę?</string>
+    <string name="question3">Nie mogłam/em odebrać paczki gdy był u mnie kurier. Co zrobić?</string>
+    <string name="question4">Dokonałam/em zakupu, kiedy otrzymam przesyłkę?</string>
+    <string name="answer1">Czasami zdarza się, że rozmiary producentów obuwia nie są identyczne. Z tego powodu, każdy model i każdy rozmiar butów mierzymy sami. Przy naszych ofertach zawsze podajemy informację na temat rozmiarówki (standardowa/zaniżona/zawyżona). Jeśli masz wątpliwości skontaktuj się proszę z naszym Biurem Obsługi Klienta - z miłą chęcią pomożemy w dokonaniu wyboru.</string>
+    <string name="answer2">Jeśli wybierzesz w formularzu zamówienia przesyłkę kurierską pobraniową, Twój zakup zostanie do Ciebie wysłany niezwłocznie po złożeniu zamówienia.</string>
+    <string name="answer3">Jeśli z jakiegoś powodu, kurier nie mógł dostarczyć przesyłki, dokona on jeszcze dwóch prób w najbliższych dniach roboczych. Do każdej z przesyłek dołączamy numer telefonu klienta, aby umożliwić kurierowi ustalenie szczegółów dostawy w takich przypadkach. Gdy jednak nie otrzymasz od nas zakupionej przesyłki, skontaktuj się z nami mailowo na: info@grace.pl lub telefonicznie pod: +48 22 222 22 22, a na pewno nasi konsultanci znajdą rozwiązanie.</string>
+    <string name="answer4">Wszystkie złożone zamówienia docierają do klientów w przeciągu 24h od momentu przekazania paczki kurierowi.</string>
+
+
 </resources>

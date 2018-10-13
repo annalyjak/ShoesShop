@@ -16,11 +16,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.example.anna.shoesshop.controller.AboutUsFragment;
+import com.example.anna.shoesshop.controller.FAQFragment;
 
 public class MainMenuActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private FragmentManager mFragmentManager;
+    private Fragment fragment = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +50,14 @@ public class MainMenuActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         mFragmentManager = getSupportFragmentManager();
+
+        //TODO change first loaded fragment to home
+        fragment = AboutUsFragment.newInstance();
+        mFragmentManager
+                .beginTransaction()
+                .replace(R.id.main_frame, fragment)
+                .addToBackStack(null)
+                .commit();
     }
 
     @Override
@@ -87,7 +97,7 @@ public class MainMenuActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-        Fragment fragment = null;
+
         if (id == R.id.nav_home) {
             // Handle the camera action
         } else if (id == R.id.nav_orders) {
@@ -99,6 +109,7 @@ public class MainMenuActivity extends AppCompatActivity
         } else if (id == R.id.nav_regulamin) {
 
         } else if (id == R.id.nav_faq) {
+            fragment = FAQFragment.newInstance();
 
         } else if (id == R.id.nav_about_us) {
             fragment = AboutUsFragment.newInstance();
@@ -106,15 +117,45 @@ public class MainMenuActivity extends AppCompatActivity
 
         mFragmentManager
                 .beginTransaction()
-                .add(R.id.main_frame, fragment)
+                .replace(R.id.main_frame, fragment)
                 .addToBackStack(null)
                 .commit();
 
 //        mDrawerLayout.closeDrawers();
 
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+    /**
+     * The first method for FAQFragment's handler
+     * @param view
+     */
+    public void onClickQ1(View view) {
+        if(fragment instanceof FAQFragment){
+            ((FAQFragment) fragment).showAndswer1();
+        }
+    }
+
+    public void onClickQ2(View view) {
+        if(fragment instanceof FAQFragment){
+            ((FAQFragment) fragment).showAndswer2();
+        }
+    }
+
+    public void onClickQ3(View view) {
+        if(fragment instanceof FAQFragment){
+            ((FAQFragment) fragment).showAndswer3();
+        }
+    }
+
+    public void onClickQ4(View view) {
+        if(fragment instanceof FAQFragment){
+            ((FAQFragment) fragment).showAndswer4();
+        }
+    }
+    /**
+     * End of FAQ handlers
+     */
 }

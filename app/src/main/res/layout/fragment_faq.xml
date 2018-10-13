@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".controller.FAQFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:id="@+id/transitions_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/textViewQ1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="11dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:fontFamily="sans-serif-condensed"
+                    android:onClick="onClickQ1"
+                    android:text="@string/question1"
+                    android:textColor="@color/color6"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    tools:ignore="OnClick"
+                    tools:layout_editor_absoluteX="74dp"
+                    tools:layout_editor_absoluteY="87dp" />
+
+                <TextView
+                    android:id="@+id/textViewA1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="11dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:fontFamily="sans-serif-condensed"
+                    android:text="@string/answer1"
+                    android:textColor="@color/color5"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/textViewQ2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="11dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:fontFamily="sans-serif-condensed"
+                    android:onClick="onClickQ2"
+                    android:text="@string/question2"
+                    android:textColor="@color/color6"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    tools:ignore="OnClick" />
+
+                <TextView
+                    android:id="@+id/textViewA2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="11dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:fontFamily="sans-serif-condensed"
+                    android:text="@string/answer2"
+                    android:textColor="@color/color5"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/textViewQ3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="11dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:fontFamily="sans-serif-condensed"
+                    android:onClick="onClickQ3"
+                    android:text="@string/question3"
+                    android:textColor="@color/color6"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    tools:ignore="OnClick" />
+
+                <TextView
+                    android:id="@+id/textViewA3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="11dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:fontFamily="sans-serif-condensed"
+                    android:text="@string/answer3"
+                    android:textColor="@color/color5"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/textViewQ4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="11dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:fontFamily="sans-serif-condensed"
+                    android:onClick="onClickQ4"
+                    android:text="@string/question4"
+                    android:textColor="@color/color6"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    tools:ignore="OnClick" />
+
+                <TextView
+                    android:id="@+id/textViewA4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="11dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:fontFamily="sans-serif-condensed"
+                    android:text="@string/answer4"
+                    android:textColor="@color/color5"
+                    android:textSize="18sp" />
+            </LinearLayout>
+        </ScrollView>
+
+    </android.support.constraint.ConstraintLayout>
+
+</FrameLayout>
