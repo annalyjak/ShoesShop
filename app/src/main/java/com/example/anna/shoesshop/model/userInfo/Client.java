@@ -6,4 +6,10 @@ public class Client {
     private String phoneNumber;
     private Sex sex;
 
+    public Client(String name, String surname, String phoneNumber, Sex sex) {
+        this.name = name;
+        this.surname = surname;
+        this.phoneNumber = phoneNumber;
+        this.sex = sex;
+    }
 }

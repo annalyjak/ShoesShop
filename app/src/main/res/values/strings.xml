@@ -25,6 +25,7 @@
 
     <string name="delivery_title">Opcje dostawy</string>
     <string name="ok">OK</string>
+    <string name="action_fav">ULUBIONE</string>
 
 
 </resources>

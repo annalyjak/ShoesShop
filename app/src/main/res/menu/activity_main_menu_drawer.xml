@@ -6,7 +6,7 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_home"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/round_loyalty_black_18dp"
             android:title="Kategorie" />
         <item
             android:id="@+id/nav_orders"
@@ -14,11 +14,11 @@
             android:title="Moje zamówienia" />
         <item
             android:id="@+id/nav_my_profile"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@drawable/round_face_black_18dp"
             android:title="Mój profil" />
         <item
             android:id="@+id/nav_fav_prod"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@drawable/round_favorite_black_18dp"
             android:title="Ulubione produkty" />
     </group>
 
@@ -26,15 +26,15 @@
         <menu>
             <item
                 android:id="@+id/nav_dostawa"
-                android:icon="@drawable/ic_menu_manage"
+                android:icon="@drawable/round_local_shipping_black_18dp"
                 android:title="Koszty i opcje dostawy" />
             <item
                 android:id="@+id/nav_faq"
-                android:icon="@drawable/ic_menu_share"
+                android:icon="@drawable/round_help_black_18dp"
                 android:title="FAQ" />
             <item
                 android:id="@+id/nav_about_us"
-                android:icon="@drawable/ic_menu_send"
+                android:icon="@drawable/round_info_black_18dp"
                 android:title="O nas" />
         </menu>
     </item>
