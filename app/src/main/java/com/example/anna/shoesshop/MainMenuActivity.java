@@ -19,9 +19,14 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import com.example.anna.shoesshop.controller.AboutUsFragment;
+import com.example.anna.shoesshop.controller.FavouritesFragment;
 import com.example.anna.shoesshop.controller.adapters.DeliveryAdapter;
 import com.example.anna.shoesshop.controller.FAQFragment;
+import com.example.anna.shoesshop.model.product.Product;
 import com.example.anna.shoesshop.model.repo.LocalDatabase;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainMenuActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -104,6 +109,9 @@ public class MainMenuActivity extends AppCompatActivity
         } else if (id == R.id.nav_my_profile) {
 
         } else if (id == R.id.nav_fav_prod) {
+            List<Product> list = new ArrayList<>();
+            //TODO downoload from database
+            fragment = FavouritesFragment.newInstance(list);
 
         } else if (id == R.id.nav_dostawa) {
             displayDeliveryInfo();

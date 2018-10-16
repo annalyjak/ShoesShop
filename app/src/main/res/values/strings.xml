@@ -26,6 +26,7 @@
     <string name="delivery_title">Opcje dostawy</string>
     <string name="ok">OK</string>
     <string name="action_fav">ULUBIONE</string>
+    <string name="no_fav_prod_info">Nie masz jeszcze ulubionych produktów :(</string>
 
 
 </resources>
