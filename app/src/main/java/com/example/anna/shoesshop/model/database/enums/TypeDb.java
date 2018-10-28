@@ -17,4 +17,9 @@ public class TypeDb extends RealmObject {
     public TypeDb(Type type) {
         this.type = type.toString();
     }
+
+    @Override
+    public String toString() {
+        return type;
+    }
 }

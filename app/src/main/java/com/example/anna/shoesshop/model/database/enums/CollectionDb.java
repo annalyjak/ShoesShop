@@ -20,4 +20,9 @@ public class CollectionDb extends RealmObject {
     public CollectionDb(Collection collection) {
         this.collection = collection.toString();
     }
+
+    @Override
+    public String toString() {
+        return collection;
+    }
 }

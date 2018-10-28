@@ -16,7 +16,7 @@ public class CategoryDb extends RealmObject {
         this.category = category;
     }
 
-    private CategoryDb(Category category) {
+    public CategoryDb(Category category) {
         this.category = category.toString();
     }
 }
