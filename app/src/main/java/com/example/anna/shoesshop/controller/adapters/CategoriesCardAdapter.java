@@ -19,19 +19,29 @@ import java.util.List;
 public class CategoriesCardAdapter extends RecyclerView.Adapter<CategoriesCardAdapter.ViewHolder> {
 
     private static final String TAG = CategoriesCardAdapter.class.getSimpleName();
+    public static final int CARD_CATEGORIES_1 = R.layout.card_categories;
+    public static final int CARD_CATEGORIES_2 = R.layout.card_categories2;
 
     private static List<Product> dataset;
     private static Activity activity;
+    private int valueOfCard = CARD_CATEGORIES_1;
 
     public CategoriesCardAdapter(FragmentActivity activity, List<Product> products) {
         this.activity =activity;
         dataset = products;
+        valueOfCard = CARD_CATEGORIES_1;
+    }
+
+    public CategoriesCardAdapter(FragmentActivity activity, List<Product> products, int view) {
+        this.activity =activity;
+        dataset = products;
+        valueOfCard = view;
     }
 
     @Override
     public CategoriesCardAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(
-                parent.getContext()).inflate(R.layout.card_categories, parent, false);
+                parent.getContext()).inflate(valueOfCard, parent, false);
         return new ViewHolder(v, parent.getContext());
     }
 

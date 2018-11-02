@@ -3,6 +3,7 @@ package com.example.anna.shoesshop.controller;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -48,14 +49,19 @@ public class CategoriesFragment extends Fragment {
         // creating list
         recyclerView = view.findViewById(R.id.categ_recyclerView);
 
-//                Log.i("", mRecyclerView == null? "null" : mRecyclerView.toString());
         if(products == null) {
             products = new ArrayList<>();
         }
-        adapter = new CategoriesCardAdapter(getActivity(), products);
+        //TODO
+//        adapter = new CategoriesCardAdapter(getActivity(), products);
+        adapter = new CategoriesCardAdapter(getActivity(), products, CategoriesCardAdapter.CARD_CATEGORIES_2);
 
-        final RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
-        recyclerView.setLayoutManager(mLayoutManager);
+        //TODO IF
+//        final RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
+        final GridLayoutManager gridManager = new GridLayoutManager(getContext(), 2, GridLayoutManager.VERTICAL, false);
+//        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setLayoutManager(gridManager);
+
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(adapter);
 
