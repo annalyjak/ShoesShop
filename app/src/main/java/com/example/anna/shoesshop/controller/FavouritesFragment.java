@@ -12,7 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.anna.shoesshop.R;
-import com.example.anna.shoesshop.controller.adapters.CategoriesCardAdapter;
 import com.example.anna.shoesshop.controller.adapters.FavouritesAdapter;
 import com.example.anna.shoesshop.model.product.Product;
 import com.example.anna.shoesshop.model.repo.LocalDatabase;
@@ -55,7 +54,7 @@ public class FavouritesFragment extends Fragment {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(adapter);
 
-        View layoutNoRav = view.findViewById(R.id.no_fav_prod);
+        layoutNoRav = view.findViewById(R.id.no_fav_prod);
         setFavView();
 
         getProductsFromDatabase();
@@ -66,6 +65,7 @@ public class FavouritesFragment extends Fragment {
         LocalDatabase localDatabase = new LocalDatabase(getActivity().getApplicationContext());
 
         favProducts = localDatabase.getAllFavouritesProducts(null);
+//        favProducts = (localDatabase.getAllProducts());
         if(favProducts != null) {
             Log.i("TAG", "SIZE : " + favProducts.size());
             for(Product product : favProducts) {

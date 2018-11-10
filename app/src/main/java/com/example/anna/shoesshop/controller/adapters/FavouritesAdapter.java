@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.example.anna.shoesshop.R;
 import com.example.anna.shoesshop.model.product.Product;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class FavouritesAdapter extends RecyclerView.Adapter<FavouritesAdapter.ViewHolder> {
@@ -42,8 +43,12 @@ public class FavouritesAdapter extends RecyclerView.Adapter<FavouritesAdapter.Vi
 
         holder.position = position;
         holder.name.setText(product.getName());
-        if(product.onPromotion()){
+        if(!product.onPromotion()){
             holder.priceActuall.setText(product.getNormalPrice().toString());
+            holder.priceNormal.setText(product.getPrice().toString());
+        } else {
+            holder.priceNormal.setVisibility(View.INVISIBLE);
+            holder.priceActuall.setText(product.getPrice().toString());
         }
         holder.priceNormal.setText(product.getPrice().toString());
         holder.picture.setImageBitmap(product.getMainPicture());
@@ -53,12 +58,16 @@ public class FavouritesAdapter extends RecyclerView.Adapter<FavouritesAdapter.Vi
     @Override
     public int getItemCount() {
         if(dataset == null) {
+            dataset = new ArrayList<>();
             return 0;
         }
         return dataset.size();
     }
 
     public void addNewProducts(Product product) {
+        if(dataset == null){
+            dataset = new ArrayList<>();
+        }
         dataset.add(product);
         this.notifyDataSetChanged();
     }
