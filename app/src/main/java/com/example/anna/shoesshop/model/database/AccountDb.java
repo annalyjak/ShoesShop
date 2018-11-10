@@ -24,6 +24,17 @@ public class AccountDb extends RealmObject {
 
     public AccountDb(String email,
                      String password,
+                     ClientDb client) {
+        this.email = email;
+        this.password = password;
+        this.client = client;
+        this.addressList = new RealmList<>();
+        this.orders = new RealmList<>();
+        this.favourites = new RealmList<>();
+    }
+
+    public AccountDb(String email,
+                     String password,
                      ClientDb client,
                      List<Address> addressList,
                      List<OrderDb> orders,

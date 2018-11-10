@@ -6,12 +6,10 @@ import android.graphics.BitmapFactory;
 import android.util.Log;
 
 import com.example.anna.shoesshop.R;
-import com.example.anna.shoesshop.model.Price;
+import com.example.anna.shoesshop.model.database.AccountDb;
+import com.example.anna.shoesshop.model.database.ClientDb;
 import com.example.anna.shoesshop.model.database.ProductDb;
-import com.example.anna.shoesshop.model.database.enums.CategoryDb;
 import com.example.anna.shoesshop.model.database.enums.SizeDb;
-import com.example.anna.shoesshop.model.database.enums.TypeDb;
-import com.example.anna.shoesshop.model.order.Delivery;
 import com.example.anna.shoesshop.model.order.Order;
 import com.example.anna.shoesshop.model.order.Status;
 import com.example.anna.shoesshop.model.product.Category;
@@ -21,7 +19,7 @@ import com.example.anna.shoesshop.model.product.Size;
 import com.example.anna.shoesshop.model.product.Type;
 import com.example.anna.shoesshop.model.userInfo.Account;
 import com.example.anna.shoesshop.model.userInfo.Client;
-import com.example.anna.shoesshop.model.userInfo.Sex;
+import com.example.anna.shoesshop.model.userInfo.Gender;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,68 +31,74 @@ import io.realm.RealmResults;
 public class LocalDatabase implements DBHelper {
 
     Context context;
+    Realm realm;
 
     public LocalDatabase(Context context) {
         this.context = context;
-    }
-
-    /**
-     * This method creates the standard list of deliver's types with standard prices
-     * @return list of Delivery
-     */
-    public static ArrayList<Delivery> getDeliveryList(){
-        ArrayList<Delivery> arrayOfDelivery = new ArrayList<Delivery>();
-        arrayOfDelivery.add(Delivery.createDPDDelivery());
-        arrayOfDelivery.add(Delivery.createPocztaPLDelivery());
-        arrayOfDelivery.add(Delivery.createPocztaPLinDelivery());
-        arrayOfDelivery.add(Delivery.createInShopDelivery());
-        return arrayOfDelivery;
+        Realm.init(context);
+        realm = Realm.getDefaultInstance();
     }
 
     @Override
     public Client getClientData() {
-        return new Client("Guest", "", "", Sex.woman);
+        Account loggedAccount = getLoggedAccount();
+        return loggedAccount.getClientInfo();
     }
 
     @Override
     public Account getLoggedAccount() {
-        return new Account("guestAccount@gmail.com", "", getClientData());
+        Account account;
+
+        RealmResults<AccountDb> all = realm.where(AccountDb.class).findAll();
+        all.load();
+        if(all.isEmpty()) {
+
+            Client client = new Client("Guest", "", "", Gender.woman);
+            account = new Account("guest", "", client);
+            ClientDb clientDb = new ClientDb("Guest", "", "", Gender.woman);
+            AccountDb accountDb = new AccountDb("guest", "", clientDb);
+            realm.beginTransaction();
+            realm.copyToRealm(accountDb);
+            realm.commitTransaction();
+            realm.close();
+        } else {
+            account = DBUtil.transferToEnum(all.get(0));
+        }
+
+        return account;
     }
 
     @Override
     public List<Order> getAllClientOrders(Account account) {
-        return null;
+        return account.getOrders();
     }
 
     @Override
-    public List<Order> getAllClientOrders(Client client) {
-        return null;
+    public List<Order> getAllClientOrders() {
+        return getLoggedAccount().getOrders();
     }
 
     @Override
     public List<Order> getClientOrdersForStatus(Account account, Status status) {
-        return null;
-    }
-
-    @Override
-    public List<Order> getClientOrdersForStatus(Client client, Status status) {
-        return null;
+        List<Order> orders = new ArrayList<>();
+        for (Order order : account.getOrders()) {
+            if(order.getStatusOfOrder().equals(status)) {
+                orders.add(order);
+            }
+        }
+        return orders;
     }
 
     @Override
     public List<Product> getAllFavouritesProducts(Account account) {
-        return null;
-    }
-
-    @Override
-    public List<Product> getAllFavouritesProducts(Client client) {
-        return null;
+        if(account == null){
+            account = getLoggedAccount();
+        }
+        return account.getFavourites();
     }
 
     @Override
     public List<Product> getAllProducts() {
-        Realm.init(context);
-        Realm realm = Realm.getDefaultInstance();
         RealmResults<ProductDb> allAsync = realm.where(ProductDb.class).findAllAsync();
         allAsync.load();
         List<ProductDb> allProducts = realm.copyFromRealm(allAsync);
@@ -103,27 +107,53 @@ public class LocalDatabase implements DBHelper {
 
     @Override
     public List<Product> getAllProductsForCollCat(Type type, Collection collection, Category category) {
-        return null;
+        List<Product> result = new ArrayList<>();
+        List<Product> allProducts = getAllProductsForCollection(type, collection);
+        for (Product product : allProducts) {
+            if(product.getCategory() == category){
+                result.add(product);
+            }
+        }
+        return result;
     }
 
     @Override
     public List<Product> getAllProductsForCollection(Type type, Collection collection) {
-        return null;
+        List<Product> result = new ArrayList<>();
+        List<Product> allProducts = getAllProductsType(type);
+        for (Product product : allProducts) {
+            if(product.getTypeOfCollection() == collection){
+                result.add(product);
+            }
+        }
+        return result;
     }
 
     @Override
     public List<Product> getAllProductsForCategory(Type type, Category category) {
-        return null;
+        List<Product> result = new ArrayList<>();
+        List<Product> allProducts = getAllProductsType(type);
+        for (Product product : allProducts) {
+            if(product.getCategory() == category){
+                result.add(product);
+            }
+        }
+        return result;
     }
 
     @Override
     public List<Product> getAllProductsType(Type type) {
-        return null;
+        List<Product> result = new ArrayList<>();
+        List<Product> allProducts = getAllProducts();
+        for (Product product : allProducts) {
+            if(product.getTypeOfProduct() == type){
+                result.add(product);
+            }
+        }
+        return result;
     }
 
-    public static void addProduct(Context context, ProductDb productDb) {
-        Realm.init(context);
-        Realm realm = Realm.getDefaultInstance();
+    public void addProduct(ProductDb productDb) {
         // Copy to Realm
         realm.beginTransaction();
         realm.copyToRealm(productDb);
@@ -152,7 +182,6 @@ public class LocalDatabase implements DBHelper {
                 Collection.winter,
                 bitmaps1
         );
-
         List<Bitmap> bitmaps2 = createListOfPictures(context,
                 R.drawable.sp1,
                 R.drawable.sp2,
@@ -194,7 +223,6 @@ public class LocalDatabase implements DBHelper {
                 Collection.winter,
                 bitmaps4
         );
-
         Realm.init(context);
         Realm realm = Realm.getDefaultInstance();
 
@@ -354,10 +382,7 @@ public class LocalDatabase implements DBHelper {
 //        Log.i("REALM_TEST", "" + allAsync.size());
 //    }
 
-    public static void removeAllProducts(Context context) {
-        Realm.init(context);
-        Realm realm = Realm.getDefaultInstance();
-
+    public void removeAllProducts() {
         realm.beginTransaction();
         realm.delete(ProductDb.class);
 

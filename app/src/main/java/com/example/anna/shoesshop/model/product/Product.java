@@ -96,6 +96,18 @@ public class Product {
         return pictures;
     }
 
+    public Type getTypeOfProduct() {
+        return typeOfProduct;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public Collection getTypeOfCollection() {
+        return typeOfCollection;
+    }
+
     public boolean onPromotion() {
         return !(normalPrice == price);
     }

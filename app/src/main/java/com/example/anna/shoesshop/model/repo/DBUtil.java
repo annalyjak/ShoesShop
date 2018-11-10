@@ -3,15 +3,20 @@ package com.example.anna.shoesshop.model.repo;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
+import com.example.anna.shoesshop.model.database.AccountDb;
+import com.example.anna.shoesshop.model.database.ClientDb;
+import com.example.anna.shoesshop.model.database.DeliveryDb;
 import com.example.anna.shoesshop.model.database.OrderDb;
 import com.example.anna.shoesshop.model.database.ProductDb;
 import com.example.anna.shoesshop.model.database.enums.CategoryDb;
 import com.example.anna.shoesshop.model.database.enums.CollectionDb;
-import com.example.anna.shoesshop.model.database.enums.SexDb;
+
+import com.example.anna.shoesshop.model.database.enums.GenderDb;
 import com.example.anna.shoesshop.model.database.enums.SizeDb;
 import com.example.anna.shoesshop.model.database.enums.StatusDb;
 import com.example.anna.shoesshop.model.database.enums.TypeDb;
 import com.example.anna.shoesshop.model.database.enums.TypeOfDeliveryDb;
+import com.example.anna.shoesshop.model.order.Delivery;
 import com.example.anna.shoesshop.model.order.Order;
 import com.example.anna.shoesshop.model.order.Status;
 import com.example.anna.shoesshop.model.order.TypeOfDelivery;
@@ -20,7 +25,9 @@ import com.example.anna.shoesshop.model.product.Collection;
 import com.example.anna.shoesshop.model.product.Product;
 import com.example.anna.shoesshop.model.product.Size;
 import com.example.anna.shoesshop.model.product.Type;
-import com.example.anna.shoesshop.model.userInfo.Sex;
+import com.example.anna.shoesshop.model.userInfo.Account;
+import com.example.anna.shoesshop.model.userInfo.Client;
+import com.example.anna.shoesshop.model.userInfo.Gender;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
@@ -40,13 +47,37 @@ public class DBUtil {
         return new StatusDb(status.toString());
     }
 
-    public static SexDb transferToEnum(Sex sex){
-        return new SexDb(sex.toString());
+    public static GenderDb transferToEnum(Gender sex){
+        return new GenderDb(sex.toString());
+    }
+
+    public static Gender transferToEnum(GenderDb sex){
+        return Gender.valueOf(sex.toString());
     }
 
     //TODO
     public static OrderDb transferToEnum(Order order){
         return new OrderDb();
+    }
+
+    public static Order transferToEnum(OrderDb order){
+        return new Order().transfer(order);
+    }
+
+    public static Client transferToEnum(ClientDb clientDb) {
+        return new Client(clientDb);
+    }
+
+    public static ClientDb transferToEnum(Client clientDb) {
+        return clientDb.transferToDb();
+    }
+
+    public static Account transferToEnum(AccountDb accountDb) {
+        return new Account(accountDb);
+    }
+
+    public static Delivery transferToEnum(DeliveryDb deliveryInformation) {
+        return new Delivery(deliveryInformation);
     }
 
     //TODO
@@ -155,7 +186,17 @@ public class DBUtil {
 
     public static List<Product> transferToProductList(List<ProductDb> list){
         ArrayList<Product> result = new ArrayList<>();
-        for (ProductDb o : list) {
+        if(list != null) {
+            for (ProductDb o : list) {
+                result.add(DBUtil.transferToEnum(o));
+            }
+        }
+        return result;
+    }
+
+    public static List<Order> transferToOrderList(List<OrderDb> orders) {
+        ArrayList<Order> result = new ArrayList<>();
+        for (OrderDb o : orders) {
             result.add(DBUtil.transferToEnum(o));
         }
         return result;

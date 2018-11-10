@@ -30,4 +30,19 @@ public class DeliveryDb extends RealmObject {
         this.priceOfDelivery = priceOfDelivery;
     }
 
+    public TypeOfDeliveryDb getTypeOfDelivery() {
+        return typeOfDelivery;
+    }
+
+    public String getDeliveryFirmName() {
+        return deliveryFirmName;
+    }
+
+    public String getDeliveryTime() {
+        return deliveryTime;
+    }
+
+    public Price getPriceOfDelivery() {
+        return priceOfDelivery;
+    }
 }

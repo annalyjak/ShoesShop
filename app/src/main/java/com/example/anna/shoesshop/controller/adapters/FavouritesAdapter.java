@@ -52,7 +52,15 @@ public class FavouritesAdapter extends RecyclerView.Adapter<FavouritesAdapter.Vi
 
     @Override
     public int getItemCount() {
+        if(dataset == null) {
+            return 0;
+        }
         return dataset.size();
+    }
+
+    public void addNewProducts(Product product) {
+        dataset.add(product);
+        this.notifyDataSetChanged();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

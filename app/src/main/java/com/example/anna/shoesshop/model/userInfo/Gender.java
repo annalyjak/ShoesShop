@@ -1,5 +1,5 @@
 package com.example.anna.shoesshop.model.userInfo;
 
-public enum Sex {
+public enum Gender {
     woman, men
 }

@@ -24,4 +24,10 @@
         <item name="editTextColor">@color/dark</item>
     </style>
 
+    <style name="ToolBarStyle" parent="Theme.AppCompat">
+        <item name="android:textColorPrimary">@color/dark</item>
+        <item name="android:textColorSecondary">@color/dark</item>
+        <item name="actionMenuTextColor">@color/dark</item>
+    </style>
+
 </resources>

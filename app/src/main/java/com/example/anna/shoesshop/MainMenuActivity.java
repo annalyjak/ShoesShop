@@ -2,9 +2,7 @@ package com.example.anna.shoesshop;
 
 import android.app.Dialog;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
@@ -23,7 +21,9 @@ import com.example.anna.shoesshop.controller.CategoriesFragment;
 import com.example.anna.shoesshop.controller.FAQFragment;
 import com.example.anna.shoesshop.controller.FavouritesFragment;
 import com.example.anna.shoesshop.controller.adapters.DeliveryAdapter;
+import com.example.anna.shoesshop.model.repo.Session;
 import com.example.anna.shoesshop.model.product.Product;
+import com.example.anna.shoesshop.model.repo.DBHelper;
 import com.example.anna.shoesshop.model.repo.LocalDatabase;
 
 import java.util.ArrayList;
@@ -34,12 +34,16 @@ public class MainMenuActivity extends AppCompatActivity
 
     private FragmentManager mFragmentManager;
     private Fragment fragment = null;
+    private DBHelper database;
+    private static Session session;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
         Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar.setTitle("GRACE SHOP");
+        toolbar.setTitleTextColor(getResources().getColor(R.color.dark));
         setSupportActionBar(toolbar);
 
 //        FloatingActionButton fab = findViewById(R.id.fab);
@@ -57,13 +61,15 @@ public class MainMenuActivity extends AppCompatActivity
 
         mFragmentManager = getSupportFragmentManager();
 
-        //TODO change first loaded fragment to home
         fragment = CategoriesFragment.newInstance();
         mFragmentManager
                 .beginTransaction()
                 .replace(R.id.main_frame, fragment)
                 .commit();
         //HERE LOCAL DATABASE INSTRUCTIONS ARE EXECUTED:
+        database = new LocalDatabase(getApplicationContext());
+        session = new Session(database);
+//        ((LocalDatabase) database).addProducts();
 //        LocalDatabase.removeAllProducts(getApplicationContext());
 //        LocalDatabase.addProducts(getApplicationContext());
 
@@ -149,6 +155,14 @@ public class MainMenuActivity extends AppCompatActivity
         return true;
     }
 
+    public Session getSession() {
+        return session;
+    }
+
+    public void setSession(Session session) {
+        this.session = session;
+    }
+
     private void displayDeliveryInfo() {
         final Dialog dialog = new Dialog(this);
 
@@ -157,7 +171,7 @@ public class MainMenuActivity extends AppCompatActivity
         ListView listView = view.findViewById(R.id.dialog_list);
         DeliveryAdapter adapter = new DeliveryAdapter(
                 MainMenuActivity.this,
-                LocalDatabase.getDeliveryList());
+                DBHelper.getDeliveryList());
         listView.setAdapter(adapter);
 
         Button button = view.findViewById(R.id.button2);

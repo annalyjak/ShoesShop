@@ -1,6 +1,7 @@
 package com.example.anna.shoesshop.model.order;
 
 import com.example.anna.shoesshop.model.Price;
+import com.example.anna.shoesshop.model.database.DeliveryDb;
 
 public class Delivery {
     private TypeOfDelivery typeOfDelivery;
@@ -13,6 +14,13 @@ public class Delivery {
         this.deliveryFirmName = deliveryFirmName;
         this.deliveryTime = deliveryTime;
         this.priceOfDelivery = priceOfDelivery;
+    }
+
+    public Delivery(DeliveryDb deliveryDb) {
+        this.typeOfDelivery = deliveryDb.getTypeOfDelivery().transferToEnum();
+        this.deliveryFirmName = deliveryDb.getDeliveryFirmName();
+        this.deliveryTime = deliveryDb.getDeliveryTime();
+        this.priceOfDelivery = deliveryDb.getPriceOfDelivery();
     }
 
     public static Delivery createDPDDelivery(){

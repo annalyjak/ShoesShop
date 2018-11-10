@@ -22,5 +22,35 @@ public class OrderDb extends RealmObject {
 
     private StatusDb statusOfOrder;
 
+    public long getNumberOfOrder() {
+        return numberOfOrder;
+    }
 
+    public RealmList<ProductDb> getProducts() {
+        return products;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public ClientDb getClient() {
+        return client;
+    }
+
+    public Date getDateOfOrder() {
+        return dateOfOrder;
+    }
+
+    public Date getDateOfDelivery() {
+        return dateOfDelivery;
+    }
+
+    public DeliveryDb getDeliveryInformation() {
+        return deliveryInformation;
+    }
+
+    public StatusDb getStatusOfOrder() {
+        return statusOfOrder;
+    }
 }

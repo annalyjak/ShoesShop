@@ -42,6 +42,13 @@ public class CategoriesFragment extends Fragment {
         return fragment;
     }
 
+    public static CategoriesFragment newInstance(List<Product> products) {
+        CategoriesFragment fragment = new CategoriesFragment();
+        fragment.viewType = GRID_VIEW;
+        fragment.products = products;
+        return fragment;
+    }
+
     public static CategoriesFragment newInstance(int viewType) {
         CategoriesFragment fragment = new CategoriesFragment();
         fragment.viewType = viewType;
