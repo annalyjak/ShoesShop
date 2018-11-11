@@ -124,14 +124,11 @@ public class CategoriesFragment extends Fragment {
             final RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
             recyclerView.setLayoutManager(layoutManager);
         }
-
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(adapter);
-
         if(products.isEmpty()){
             getListOfAllProducts();
         }
-
         return view;
     }
 

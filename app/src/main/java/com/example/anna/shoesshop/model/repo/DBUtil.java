@@ -1,5 +1,6 @@
 package com.example.anna.shoesshop.model.repo;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
@@ -80,11 +81,9 @@ public class DBUtil {
         return new Delivery(deliveryInformation);
     }
 
-    //TODO
     public static ProductDb transferToEnum(Product product){
-        return new ProductDb();
+        return product.transferToDBObject();
     }
-
 
     public static Product transferToEnum(ProductDb product){
         Product result = new Product(product.getTypeOfProduct(),
@@ -124,11 +123,17 @@ public class DBUtil {
     }
 
     public static Category transferToEnum(CategoryDb categoryDb) {
+        if (categoryDb == null) {
+            return Category.shoes;
+        }
         return (categoryDb.equals("shoes"))? Category.shoes :
                 (categoryDb.equals("clothes")? Category.clothes : Category.accessories);
     }
 
     public static Type transferToEnum(TypeDb typeDb) {
+        if(typeDb == null) {
+            return Type.women;
+        }
         return (typeDb.equals("women"))? Type.women : (typeDb.equals("men")? Type.men : Type.kid);
     }
 
@@ -159,6 +164,9 @@ public class DBUtil {
     }
 
     public static Collection transferToEnum(CollectionDb typeOfCollection) {
+        if(typeOfCollection == null) {
+            return Collection.spring;
+        }
         switch (typeOfCollection.toString()) {
             case ("summer"): return Collection.summer;
             case ("autumn"): return Collection.autumn;
@@ -218,4 +226,11 @@ public class DBUtil {
         return byteArray;
     }
 
+    public static RealmList<SizeDb> transferToSizesList(List<Size> sizes) {
+        RealmList<SizeDb> result = new RealmList<>();
+        for (Size s : sizes) {
+            result.add(new SizeDb(s));
+        }
+        return result;
+    }
 }

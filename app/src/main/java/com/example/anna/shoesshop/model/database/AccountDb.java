@@ -109,4 +109,21 @@ public class AccountDb extends RealmObject {
     public void setFavourites(RealmList<ProductDb> favourites) {
         this.favourites = favourites;
     }
+
+    public boolean checkIsFavourite(ProductDb productDb) {
+        return favourites.contains(productDb);
+    }
+
+    public void addProductToFavourites(ProductDb productDb) {
+        if(favourites == null){
+            this.favourites = new RealmList<>();
+        }
+        favourites.add(productDb);
+    }
+
+    public void removeFromFavourites(ProductDb productDb) {
+        if (favourites != null) {
+            favourites.remove(productDb);
+        }
+    }
 }

@@ -1,8 +1,11 @@
 package com.example.anna.shoesshop.model.repo;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.PorterDuff;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 
 import com.example.anna.shoesshop.R;
@@ -153,6 +156,72 @@ public class LocalDatabase implements DBHelper {
         return result;
     }
 
+    @Override
+    public void addProductToFavourites(Product product) {
+        Account loggedAccount = getLoggedAccount();
+        loggedAccount.addProductToFavourites(product);
+
+        AccountDb all = getAccountDb(loggedAccount);
+        ProductDb productDb = getProductDb(product);
+
+        if(!all.checkIsFavourite(productDb)) {
+            realm.beginTransaction();
+            all.addProductToFavourites(productDb);
+            realm.commitTransaction();
+            realm.close();
+//            showAlert("Dodano " + product.getName() + " do ulubionych");
+        } else {
+//            showAlert("Ten produkt jest już ulubiony!");
+        }
+    }
+
+    @Override
+    public void removeFromFavourites(Product product) {
+        Account loggedAccount = getLoggedAccount();
+        loggedAccount.removeFromFavourites(product);
+
+        AccountDb all = getAccountDb(loggedAccount);
+        ProductDb productDb = getProductDb(product);
+
+        if(all.checkIsFavourite(productDb)) {
+            realm.beginTransaction();
+            all.removeFromFavourites(productDb);
+            realm.commitTransaction();
+            realm.close();
+//            showAlert("Usunięto " + product.getName() + " z ulubionych");
+        }
+    }
+
+    //helpers
+    private AccountDb getAccountDb(Account account) {
+        AccountDb all = realm.where(AccountDb.class)
+                .equalTo("email", account.getEmail())
+                .equalTo("password", account.getPassword())
+                .findFirst();
+        all.load();
+        return all;
+    }
+
+    private ProductDb getProductDb(Product product) {
+        ProductDb productDb = realm.where(ProductDb.class)
+                .equalTo("name", product.getName())
+                .equalTo("numberOfProduct", product.getNumberOfProduct())
+                .findFirst();
+        productDb.load();
+        return productDb;
+    }
+
+    //CONFIG
+    private void showAlert(String message){
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setMessage(message)
+                .setCancelable(false)
+                .setPositiveButton("OK", (dialog, id) -> dialog.cancel());
+        AlertDialog alert = builder.create();
+        alert.show();
+    }
+
+    // MANIPULACJA NA DANYCH Z BAZY
     public void addProduct(ProductDb productDb) {
         // Copy to Realm
         realm.beginTransaction();

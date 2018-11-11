@@ -8,10 +8,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.anna.shoesshop.R;
+import com.example.anna.shoesshop.controller.tasks.AddProductToFavTask;
 import com.example.anna.shoesshop.model.product.Product;
 
 import java.util.List;
@@ -60,6 +62,7 @@ public class CategoriesCardAdapter extends RecyclerView.Adapter<CategoriesCardAd
             holder.priceActuall.setText(product.getPrice().toString());
         }
         holder.picture.setImageBitmap(product.getMainPicture());
+        holder.adapter = this;
 
     }
 
@@ -73,12 +76,19 @@ public class CategoriesCardAdapter extends RecyclerView.Adapter<CategoriesCardAd
         this.notifyDataSetChanged();
     }
 
+    public void addProductToFavourites(int position) {
+        Product product = dataset.get(position);
+        new AddProductToFavTask(this, activity).execute(product);
+    }
+
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         public int position;
         public TextView name, priceActuall, priceNormal;
         public ImageView picture;
+        public ImageButton imageButton;
         private Context context;
+        private CategoriesCardAdapter adapter;
 
         public ViewHolder(View v, final Context context) {
             super(v);
@@ -87,6 +97,8 @@ public class CategoriesCardAdapter extends RecyclerView.Adapter<CategoriesCardAd
             priceActuall = v.findViewById(R.id.categ_actuall_price);
             priceNormal = v.findViewById(R.id.categ_normal_price);
             picture = v.findViewById(R.id.categ_imageView);
+            imageButton = v.findViewById(R.id.imageButton);
+            imageButton.setOnClickListener(view -> adapter.addProductToFavourites(position));
 
             //TODO on Card click action
 //            v.setOnClickListener(new View.OnClickListener() {

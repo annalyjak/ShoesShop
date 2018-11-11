@@ -4,13 +4,13 @@ import android.graphics.Bitmap;
 import android.media.Image;
 
 import com.example.anna.shoesshop.model.Price;
+import com.example.anna.shoesshop.model.database.ProductDb;
 import com.example.anna.shoesshop.model.database.enums.CategoryDb;
 import com.example.anna.shoesshop.model.database.enums.CollectionDb;
 import com.example.anna.shoesshop.model.database.enums.SizeDb;
 import com.example.anna.shoesshop.model.database.enums.TypeDb;
 import com.example.anna.shoesshop.model.repo.DBUtil;
 
-import java.math.BigInteger;
 import java.util.List;
 
 public class Product {
@@ -108,7 +108,23 @@ public class Product {
         return typeOfCollection;
     }
 
+    public long getNumberOfProduct() {
+        return numberOfProduct;
+    }
+
     public boolean onPromotion() {
         return !(normalPrice == price);
+    }
+
+    public ProductDb transferToDBObject(){
+        return ProductDb.newInstance(name,
+                category,
+                listOfSizes,
+                numberOfProduct,
+                price,
+                normalPrice,
+                typeOfProduct,
+                typeOfCollection,
+                pictures);
     }
 }

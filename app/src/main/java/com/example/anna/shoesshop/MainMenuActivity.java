@@ -69,9 +69,8 @@ public class MainMenuActivity extends AppCompatActivity
         //HERE LOCAL DATABASE INSTRUCTIONS ARE EXECUTED:
         database = new LocalDatabase(getApplicationContext());
         session = new Session(database);
-//        ((LocalDatabase) database).addProducts();
-//        LocalDatabase.removeAllProducts(getApplicationContext());
 //        LocalDatabase.addProducts(getApplicationContext());
+//        ((LocalDatabase) database).addProducts();
 
     }
 

@@ -51,4 +51,27 @@ public class Account {
     public List<Product> getFavourites() {
         return favourites;
     }
+
+    public void addProductToFavourites(Product product) {
+        if(favourites == null) {
+            favourites = new ArrayList<>();
+        }
+        if(!favourites.contains(product)) {
+            favourites.add(product);
+        }
+    }
+
+    public void removeFromFavourites(Product product) {
+        if(favourites != null){
+            favourites.remove(product);
+        }
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
 }

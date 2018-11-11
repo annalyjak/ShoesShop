@@ -79,6 +79,29 @@ public class ProductDb extends RealmObject {
         return result;
     }
 
+    public static ProductDb newInstance(String name,
+                                        Category category,
+                                        List<Size> sizes,
+                                        long numberOfProduct,
+                                        Price price,
+                                        Price normalprice,
+                                        Type type,
+                                        Collection collection,
+                                        List<Bitmap> bitmaps){
+        ProductDb result = new ProductDb();
+        result.setCategory(new CategoryDb(category));
+        result.setName(name);
+        result.setListOfSizes(DBUtil.transferToSizesList(sizes));
+        result.setNumberOfProduct(numberOfProduct);
+        result.setPrice(price);
+        result.setNormalPrice(normalprice);
+        result.setTypeOfProduct(new TypeDb(type));
+        result.setTypeOfCollection(collection);
+        RealmList<byte[]> pictures = DBUtil.transferToByteArray(bitmaps);
+        result.setPictures(pictures);
+        return result;
+    }
+
     public Price getNormalPrice() {
         return normalPrice;
     }
