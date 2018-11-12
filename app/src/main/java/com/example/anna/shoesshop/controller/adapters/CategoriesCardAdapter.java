@@ -1,9 +1,7 @@
 package com.example.anna.shoesshop.controller.adapters;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
-import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +10,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.anna.shoesshop.MainMenuActivity;
 import com.example.anna.shoesshop.R;
 import com.example.anna.shoesshop.controller.tasks.AddProductToFavTask;
 import com.example.anna.shoesshop.model.product.Product;
@@ -20,21 +19,20 @@ import java.util.List;
 
 public class CategoriesCardAdapter extends RecyclerView.Adapter<CategoriesCardAdapter.ViewHolder> {
 
-    private static final String TAG = CategoriesCardAdapter.class.getSimpleName();
     public static final int CARD_CATEGORIES_1 = R.layout.card_categories;
     public static final int CARD_CATEGORIES_2 = R.layout.card_categories2;
 
     private static List<Product> dataset;
-    private static Activity activity;
-    private int valueOfCard = CARD_CATEGORIES_1;
+    private static MainMenuActivity activity;
+    private int valueOfCard;
 
-    public CategoriesCardAdapter(FragmentActivity activity, List<Product> products) {
+    public CategoriesCardAdapter(MainMenuActivity activity, List<Product> products) {
         this.activity =activity;
         dataset = products;
         valueOfCard = CARD_CATEGORIES_1;
     }
 
-    public CategoriesCardAdapter(FragmentActivity activity, List<Product> products, int view) {
+    public CategoriesCardAdapter(MainMenuActivity activity, List<Product> products, int view) {
         this.activity =activity;
         dataset = products;
         valueOfCard = view;
@@ -76,21 +74,25 @@ public class CategoriesCardAdapter extends RecyclerView.Adapter<CategoriesCardAd
         this.notifyDataSetChanged();
     }
 
-    public void addProductToFavourites(int position) {
+    private void addProductToFavourites(int position) {
         Product product = dataset.get(position);
         new AddProductToFavTask(this, activity).execute(product);
+    }
+
+    private Product getActualProduct(int position) {
+        return dataset.get(position);
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         public int position;
-        public TextView name, priceActuall, priceNormal;
-        public ImageView picture;
+        TextView name, priceActuall, priceNormal;
+        ImageView picture;
         public ImageButton imageButton;
         private Context context;
         private CategoriesCardAdapter adapter;
 
-        public ViewHolder(View v, final Context context) {
+        ViewHolder(View v, final Context context) {
             super(v);
             this.context = context;
             name = v.findViewById(R.id.name_categ_prod);
@@ -100,76 +102,8 @@ public class CategoriesCardAdapter extends RecyclerView.Adapter<CategoriesCardAd
             imageButton = v.findViewById(R.id.imageButton);
             imageButton.setOnClickListener(view -> adapter.addProductToFavourites(position));
 
-            //TODO on Card click action
-//            v.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    final Dialog dialog = new Dialog(context, R.style.SettingsDialogStyle);
-//                    dialog.setContentView(R.layout.dialog_planned_route_card_click);
-////                    dialog.setTitle(R.string.dialog_add_new_planned_route_title_headline);
-//
-//                    Button generateReportButton = (Button) dialog.findViewById(R.id.buttonGenerateReport);
-//                    generateReportButton.setOnClickListener(new View.OnClickListener() {
-//                        @Override
-//                        public void onClick(View v) {
-//                            dialog.dismiss();
-//                            final TransportSelectionFragment fragment = TransportSelectionFragment
-//                                    .newInstance(getSelectedRoute(position));
-//                            ((MainActivity)activity).attachNewFragment(fragment);
-//                        }
-//                    });
-//
-//                    Button showRouteOnMapButton = (Button) dialog.findViewById(R.id.buttonShowRouteOnMap);
-//                    showRouteOnMapButton.setOnClickListener(new View.OnClickListener() {
-//                        @Override
-//                        public void onClick(View v) {
-//                            dialog.dismiss();
-//                            Intent openMapIntent = new Intent(((Dialog) dialog).getContext(),
-//                                    MapsActivity.class);
-//                            PlannedRoute route = getSelectedRoute(position);
-//                            Bundle bundle = new Bundle();
-//                            bundle.putString("title", route.getTitle());
-//                            bundle.putInt("duration", route.getDuration());
-//                            bundle.putInt("distance", route.getDistance());
-//                            openMapIntent.putExtras(bundle);
-//                            activity.startActivity(openMapIntent);
-//                        }
-//
-//                    });
-//                    Button showPointsButton = (Button) dialog.findViewById(R.id.buttonShowAllPoints);
-//                    showPointsButton.setOnClickListener(new View.OnClickListener(){
-//                        @Override
-//                        public void onClick(View v)
-//                        {
-//                            dialog.dismiss();
-//                            Fragment newFragment = PointsFragment.newInstance(getSelectedRoute(position));
-//                            ((MainActivity) activity).attachNewFragment(newFragment);
-//                        }
-//                    });
-//
-//                    Button deleteMarkerButton = (Button) dialog.findViewById(R.id.buttonDeleteRoute);
-//                    deleteMarkerButton.setOnClickListener(new View.OnClickListener(){
-//                        @Override
-//                        public void onClick(View view) {
-//                            dialog.dismiss();
-//                            removeThisItemFromDatabase(position);
-//                            if (activity instanceof MainActivity) {
-//                                ((MainActivity) activity).notyfyDataSetChange();
-//                            }
-//                        }
-//                    });
-//
-//                    Button anulujButton = (Button) dialog.findViewById(R.id.buttonAnuluj);
-//                    anulujButton.setOnClickListener(new View.OnClickListener(){
-//                        @Override
-//                        public void onClick(View v) {
-//                            dialog.dismiss();
-//                        }
-//                    });
-//
-//                    dialog.show();
-//                }
-//            });
+            v.setOnClickListener(view -> activity.changeViewToProductDetails(
+                    adapter.getActualProduct(position)));
         }
     }
 

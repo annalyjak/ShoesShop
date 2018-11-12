@@ -2,6 +2,7 @@ package com.example.anna.shoesshop.controller;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
@@ -13,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.example.anna.shoesshop.MainMenuActivity;
 import com.example.anna.shoesshop.R;
 import com.example.anna.shoesshop.controller.adapters.CategoriesCardAdapter;
 import com.example.anna.shoesshop.model.product.Product;
@@ -68,7 +70,7 @@ public class CategoriesFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_categories, container, false);
@@ -97,7 +99,9 @@ public class CategoriesFragment extends Fragment {
                     }
                    );
 
-            adapter = new CategoriesCardAdapter(getActivity(), products, CategoriesCardAdapter.CARD_CATEGORIES_2);
+            adapter = new CategoriesCardAdapter((MainMenuActivity) getActivity(),
+                    products,
+                    CategoriesCardAdapter.CARD_CATEGORIES_2);
             final GridLayoutManager gridManager = new GridLayoutManager(getContext(), 2, GridLayoutManager.VERTICAL, false);
             recyclerView.setLayoutManager(gridManager);
 
@@ -120,7 +124,9 @@ public class CategoriesFragment extends Fragment {
 
             });
 
-            adapter = new CategoriesCardAdapter(getActivity(), products, CategoriesCardAdapter.CARD_CATEGORIES_1);
+            adapter = new CategoriesCardAdapter((MainMenuActivity) getActivity(),
+                    products,
+                    CategoriesCardAdapter.CARD_CATEGORIES_1);
             final RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
             recyclerView.setLayoutManager(layoutManager);
         }

@@ -20,11 +20,12 @@ import com.example.anna.shoesshop.controller.AboutUsFragment;
 import com.example.anna.shoesshop.controller.CategoriesFragment;
 import com.example.anna.shoesshop.controller.FAQFragment;
 import com.example.anna.shoesshop.controller.FavouritesFragment;
+import com.example.anna.shoesshop.controller.ProductDetailsFragment;
 import com.example.anna.shoesshop.controller.adapters.DeliveryAdapter;
-import com.example.anna.shoesshop.model.repo.Session;
 import com.example.anna.shoesshop.model.product.Product;
 import com.example.anna.shoesshop.model.repo.DBHelper;
 import com.example.anna.shoesshop.model.repo.LocalDatabase;
+import com.example.anna.shoesshop.model.repo.Session;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -143,11 +144,7 @@ public class MainMenuActivity extends AppCompatActivity
         mFragmentManager
                 .beginTransaction()
                 .replace(R.id.main_frame, fragment)
-                //TODO zastanowić się czy robić stos
-//                .addToBackStack(null)
                 .commit();
-
-//        mDrawerLayout.closeDrawers();
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
@@ -160,6 +157,15 @@ public class MainMenuActivity extends AppCompatActivity
 
     public void setSession(Session session) {
         this.session = session;
+    }
+
+    public void changeViewToProductDetails(Product product) {
+        fragment = ProductDetailsFragment.newInstance(product);
+        mFragmentManager
+                .beginTransaction()
+                .replace(R.id.main_frame, fragment)
+                .addToBackStack(null)
+                .commit();
     }
 
     private void displayDeliveryInfo() {
@@ -179,7 +185,6 @@ public class MainMenuActivity extends AppCompatActivity
         dialog.setContentView(view);
         dialog.show();
     }
-
 
     /**
      * The first method for FAQFragment's handler

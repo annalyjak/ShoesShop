@@ -1,6 +1,5 @@
 package com.example.anna.shoesshop.model.repo;
 
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
@@ -11,7 +10,6 @@ import com.example.anna.shoesshop.model.database.OrderDb;
 import com.example.anna.shoesshop.model.database.ProductDb;
 import com.example.anna.shoesshop.model.database.enums.CategoryDb;
 import com.example.anna.shoesshop.model.database.enums.CollectionDb;
-
 import com.example.anna.shoesshop.model.database.enums.GenderDb;
 import com.example.anna.shoesshop.model.database.enums.SizeDb;
 import com.example.anna.shoesshop.model.database.enums.StatusDb;
@@ -37,8 +35,6 @@ import java.util.List;
 import io.realm.RealmList;
 
 public class DBUtil {
-
-    private static List<Order> list;
 
     public static TypeOfDeliveryDb transferToEnum(TypeOfDelivery type){
         return new TypeOfDeliveryDb(type.toString());
@@ -96,6 +92,7 @@ public class DBUtil {
                 DBUtil.transferToEnumList(product.getListOfSizes()),
                 product.getSelectedSize(),
                 product.getNormalPrice() );
+        result.setBytePictures(product.getPictures());
         return result;
     }
 
@@ -108,6 +105,12 @@ public class DBUtil {
             list.add(BitmapFactory.decodeByteArray(p, 0, p.length, options));
         }
         return list;
+    }
+
+    public static Bitmap transferToBigBitmap(byte[] picture) {
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inSampleSize = 2;
+        return BitmapFactory.decodeByteArray(picture, 0, picture.length, options);
     }
 
     private static List<Size> transferToEnumList(RealmList<SizeDb> listOfSizes) {
@@ -126,15 +129,16 @@ public class DBUtil {
         if (categoryDb == null) {
             return Category.shoes;
         }
-        return (categoryDb.equals("shoes"))? Category.shoes :
-                (categoryDb.equals("clothes")? Category.clothes : Category.accessories);
+        return (categoryDb.toString().equals("shoes"))? Category.shoes :
+                (categoryDb.toString().equals("clothes")? Category.clothes : Category.accessories);
     }
 
     public static Type transferToEnum(TypeDb typeDb) {
         if(typeDb == null) {
             return Type.women;
         }
-        return (typeDb.equals("women"))? Type.women : (typeDb.equals("men")? Type.men : Type.kid);
+        return (typeDb.toString().equals("women"))? Type.women :
+                (typeDb.toString().equals("men")? Type.men : Type.kid);
     }
 
     public static Size transferToEnum(SizeDb selectedSize) {

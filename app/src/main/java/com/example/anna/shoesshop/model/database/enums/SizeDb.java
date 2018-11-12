@@ -1,5 +1,7 @@
 package com.example.anna.shoesshop.model.database.enums;
 
+import android.support.annotation.NonNull;
+
 import com.example.anna.shoesshop.model.product.Size;
 
 import io.realm.RealmObject;
@@ -18,5 +20,11 @@ public class SizeDb extends RealmObject {
 
     public SizeDb(Size size) {
         this.size = size.toString();
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return size;
     }
 }

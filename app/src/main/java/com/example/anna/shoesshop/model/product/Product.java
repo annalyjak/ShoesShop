@@ -1,7 +1,6 @@
 package com.example.anna.shoesshop.model.product;
 
 import android.graphics.Bitmap;
-import android.media.Image;
 
 import com.example.anna.shoesshop.model.Price;
 import com.example.anna.shoesshop.model.database.ProductDb;
@@ -23,6 +22,7 @@ public class Product {
     private Price price;
     private String name;
     private List<Bitmap> pictures;
+    private List<byte[]> bytePictures;
     //details
     private List<Size> listOfSizes;
     private Size selectedSize = Size.universal;
@@ -73,6 +73,14 @@ public class Product {
         this.normalPrice = normalPrice;
     }
 
+    public List<byte[]> getBytePictures() {
+        return bytePictures;
+    }
+
+    public void setBytePictures(List<byte[]> bytePictures) {
+        this.bytePictures = bytePictures;
+    }
+
     public Price getPrice() {
         return price;
     }
@@ -114,6 +122,17 @@ public class Product {
 
     public boolean onPromotion() {
         return !(normalPrice == price);
+    }
+
+    public String getSizes() {
+        StringBuilder result = new StringBuilder();
+        for (Size size : listOfSizes) {
+            result.append(size.name());
+            if(listOfSizes.indexOf(size) <= listOfSizes.size()-1) {
+                result.append(", ");
+            }
+        }
+        return result.toString();
     }
 
     public ProductDb transferToDBObject(){
