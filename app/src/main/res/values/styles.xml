@@ -16,7 +16,7 @@
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
-    
+
     <style name="MyPalette" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/darkCream</item>
         <item name="colorPrimaryDark">@color/baseWhite</item>
@@ -29,5 +29,9 @@
         <item name="android:textColorSecondary">@color/dark</item>
         <item name="actionMenuTextColor">@color/dark</item>
     </style>
+
+    <style name="MyPalette.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="MyPalette.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 </resources>

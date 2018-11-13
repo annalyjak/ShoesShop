@@ -1,6 +1,7 @@
 package com.example.anna.shoesshop.controller;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -50,9 +51,18 @@ public class ProductDetailsFragment extends Fragment {
         category = view.findViewById(R.id.textViewCategoryContent);
         sizes = view.findViewById(R.id.textViewSizesContent);
         price = view.findViewById(R.id.textViewPrice);
+        setImageListener();
 
         setContentInfo();
         return view;
+    }
+
+    private void setImageListener(){
+        image.setOnClickListener(view -> {
+            PicturesActivity.pictures = product.getBytePictures();
+            Intent intent = new Intent(getActivity(), PicturesActivity.class);
+            startActivity(intent);
+        });
     }
 
     private void setContentInfo() {

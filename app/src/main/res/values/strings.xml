@@ -27,5 +27,8 @@
     <string name="action_fav">ULUBIONE</string>
     <string name="no_fav_prod_info">Nie masz jeszcze ulubionych produktów :(</string>
 
+    <string name="title_activity_pictures">PicturesActivity</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+
 
 </resources>

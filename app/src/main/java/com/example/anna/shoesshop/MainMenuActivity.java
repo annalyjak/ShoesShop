@@ -2,6 +2,7 @@ package com.example.anna.shoesshop;
 
 import android.app.Dialog;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -86,6 +87,12 @@ public class MainMenuActivity extends AppCompatActivity
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        setActuallFragment();
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main_menu, menu);
@@ -116,7 +123,7 @@ public class MainMenuActivity extends AppCompatActivity
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
@@ -165,6 +172,13 @@ public class MainMenuActivity extends AppCompatActivity
                 .beginTransaction()
                 .replace(R.id.main_frame, fragment)
                 .addToBackStack(null)
+                .commit();
+    }
+
+    private void setActuallFragment() {
+        mFragmentManager
+                .beginTransaction()
+                .replace(R.id.main_frame, fragment)
                 .commit();
     }
 
