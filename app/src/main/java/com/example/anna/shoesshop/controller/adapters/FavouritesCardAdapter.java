@@ -1,13 +1,10 @@
 package com.example.anna.shoesshop.controller.adapters;
 
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.res.Resources;
-import android.os.AsyncTask;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,34 +13,38 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.anna.shoesshop.R;
+import com.example.anna.shoesshop.controller.FavouritesFragment;
 import com.example.anna.shoesshop.controller.tasks.DeleteProductFromFavTask;
 import com.example.anna.shoesshop.model.product.Product;
-import com.example.anna.shoesshop.model.repo.LocalDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class FavouritesAdapter extends RecyclerView.Adapter<FavouritesAdapter.ViewHolder> {
+public class FavouritesCardAdapter extends RecyclerView.Adapter<FavouritesCardAdapter.ViewHolder> {
 
-    private static final String TAG = FavouritesAdapter.class.getSimpleName();
+    private static final String TAG = FavouritesCardAdapter.class.getSimpleName();
 
     private static List<Product> dataset;
     private static Activity activity;
+    private FavouritesFragment fragment;
 
-    public FavouritesAdapter(FragmentActivity activity, List<Product> favProducts) {
+    public FavouritesCardAdapter(FragmentActivity activity,
+                                 List<Product> favProducts,
+                                 FavouritesFragment fragment) {
         this.activity =activity;
         dataset = favProducts;
+        this.fragment = fragment;
     }
 
     @Override
-    public FavouritesAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public FavouritesCardAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(
                 parent.getContext()).inflate(R.layout.card_fav_products, parent, false);
         return new ViewHolder(v, parent.getContext());
     }
 
     @Override
-    public void onBindViewHolder(final FavouritesAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(final FavouritesCardAdapter.ViewHolder holder, int position) {
         Product product = dataset.get(position);
         Resources resources = activity.getApplicationContext().getResources();
 
@@ -82,7 +83,11 @@ public class FavouritesAdapter extends RecyclerView.Adapter<FavouritesAdapter.Vi
     private void removeProductFromFavourites(int position) {
         Product product = dataset.get(position);
         dataset.remove(position);
-        new DeleteProductFromFavTask(this, activity).execute(product);
+        new DeleteProductFromFavTask(this, activity, fragment).execute(product);
+    }
+
+    public boolean hasEmptyFavList() {
+        return dataset.isEmpty();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -92,7 +97,7 @@ public class FavouritesAdapter extends RecyclerView.Adapter<FavouritesAdapter.Vi
         public ImageView picture;
         public ImageButton deleteButton;
         private Context context;
-        private FavouritesAdapter adapter;
+        private FavouritesCardAdapter adapter;
 
         public ViewHolder(View v, final Context context) {
             super(v);

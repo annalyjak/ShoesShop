@@ -7,11 +7,11 @@ import android.support.v7.widget.RecyclerView;
 
 public abstract class ProgressTask<T> extends AsyncTask<T, Void, Void> {
 
-    private RecyclerView.Adapter adapter;
-    protected ProgressDialog dialog;
-    protected Activity activity;
+    RecyclerView.Adapter adapter;
+    ProgressDialog dialog;
+    Activity activity;
 
-    public ProgressTask(RecyclerView.Adapter adapter, Activity activity) {
+    ProgressTask(RecyclerView.Adapter adapter, Activity activity) {
         this.adapter = adapter;
         this.activity = activity;
         dialog = new ProgressDialog(activity);

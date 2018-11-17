@@ -1,25 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".controller.FavouritesFragment">
-
-    <android.support.constraint.ConstraintLayout
-        android:id="@+id/with_fav_prod"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/order_recycler_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-    </android.support.constraint.ConstraintLayout>
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".controller.BasketFragment">
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/no_fav_prod"
@@ -28,7 +13,7 @@
         android:background="@drawable/shoes_pion">
 
         <TextView
-            android:id="@+id/textView5"
+            android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-condensed"
@@ -36,7 +21,7 @@
             android:shadowDx="1"
             android:shadowDy="1"
             android:shadowRadius="2"
-            android:text="@string/no_fav_prod_info"
+            android:text="@string/no_prod_info"
             android:textAlignment="center"
             android:textColor="@color/color1"
             android:textSize="24sp"

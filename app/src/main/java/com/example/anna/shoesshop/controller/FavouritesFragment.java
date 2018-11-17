@@ -12,7 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.anna.shoesshop.R;
-import com.example.anna.shoesshop.controller.adapters.FavouritesAdapter;
+import com.example.anna.shoesshop.controller.adapters.FavouritesCardAdapter;
 import com.example.anna.shoesshop.model.product.Product;
 import com.example.anna.shoesshop.model.repo.LocalDatabase;
 
@@ -46,8 +46,8 @@ public class FavouritesFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_favourites, container, false);
         // creating list
-        recyclerView = view.findViewById(R.id.fav_prod_recycler_view);
-        adapter = new FavouritesAdapter(getActivity(), favProducts);
+        recyclerView = view.findViewById(R.id.order_recycler_view);
+        adapter = new FavouritesCardAdapter(getActivity(), favProducts, this);
         final RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
 
         recyclerView.setLayoutManager(mLayoutManager);
@@ -69,7 +69,7 @@ public class FavouritesFragment extends Fragment {
         if(favProducts != null) {
             Log.i("TAG", "SIZE : " + favProducts.size());
             for(Product product : favProducts) {
-                ((FavouritesAdapter) adapter).addNewProducts(product);
+                ((FavouritesCardAdapter) adapter).addNewProducts(product);
             }
 
             adapter.notifyDataSetChanged();
@@ -77,20 +77,14 @@ public class FavouritesFragment extends Fragment {
         }
     }
 
+    public void setNoProducts() {
+        layoutNoRav.setVisibility(View.VISIBLE);
+    }
+
     private void setFavView() {
         if(favProducts != null && !favProducts.isEmpty()) {
             layoutNoRav.setVisibility(View.INVISIBLE);
         }
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
     }
 
 }

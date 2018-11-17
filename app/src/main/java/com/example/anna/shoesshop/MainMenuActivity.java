@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import com.example.anna.shoesshop.controller.AboutUsFragment;
+import com.example.anna.shoesshop.controller.BasketFragment;
 import com.example.anna.shoesshop.controller.CategoriesFragment;
 import com.example.anna.shoesshop.controller.FAQFragment;
 import com.example.anna.shoesshop.controller.FavouritesFragment;
@@ -110,11 +111,14 @@ public class MainMenuActivity extends AppCompatActivity
             List<Product> list = new ArrayList<>();
             //TODO downoload from database
             fragment = FavouritesFragment.newInstance(null);
+            setActuallFragment();
             return true;
         }
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_bag) {
+            fragment = BasketFragment.newInstance(null);
+            setActuallFragment();
             return true;
         }
 
@@ -138,7 +142,7 @@ public class MainMenuActivity extends AppCompatActivity
             //TODO downoload from database
             fragment = FavouritesFragment.newInstance(null);
 
-        } else if (id == R.id.nav_dostawa) {
+        } else if (id == R.id.nav_delivery) {
             displayDeliveryInfo();
 
         } else if (id == R.id.nav_faq) {
