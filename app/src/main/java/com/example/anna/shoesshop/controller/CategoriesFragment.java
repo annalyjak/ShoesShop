@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import com.example.anna.shoesshop.MainMenuActivity;
 import com.example.anna.shoesshop.R;
 import com.example.anna.shoesshop.controller.adapters.CategoriesCardAdapter;
+import com.example.anna.shoesshop.controller.tasks.DownloadProductsTask;
 import com.example.anna.shoesshop.model.product.Product;
 import com.example.anna.shoesshop.model.repo.LocalDatabase;
 
@@ -138,16 +139,24 @@ public class CategoriesFragment extends Fragment {
         return view;
     }
 
-    private void getListOfAllProducts() {
+    public void changeProductList(List<Product> list) {
+        products = list;
+        changeViewUsingAdapter();
+    }
 
-        LocalDatabase localDatabase = new LocalDatabase(getActivity().getApplicationContext());
-        products = localDatabase.getAllProducts();
-
-        Log.i("TAG", "SIZE : " + products.size());
+    private void changeViewUsingAdapter() {
         for(Product product : products) {
             ((CategoriesCardAdapter) adapter).addNewProducts(product);
         }
         adapter.notifyDataSetChanged();
+    }
+
+    private void getListOfAllProducts() {
+        LocalDatabase localDatabase = new LocalDatabase(getActivity().getApplicationContext());
+        products = localDatabase.getAllProducts();
+
+        Log.i("TAG", "SIZE : " + products.size());
+        changeViewUsingAdapter();
     }
 
 }

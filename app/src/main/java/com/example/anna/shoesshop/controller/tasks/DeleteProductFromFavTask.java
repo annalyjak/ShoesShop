@@ -1,7 +1,6 @@
 package com.example.anna.shoesshop.controller.tasks;
 
 import android.app.Activity;
-import android.text.style.TtsSpan;
 
 import com.example.anna.shoesshop.controller.FavouritesFragment;
 import com.example.anna.shoesshop.controller.adapters.FavouritesCardAdapter;

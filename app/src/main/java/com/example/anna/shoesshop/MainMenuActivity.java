@@ -117,8 +117,7 @@ public class MainMenuActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_bag) {
-            fragment = BasketFragment.newInstance(null);
-            setActuallFragment();
+            setBasketView();
             return true;
         }
 
@@ -162,16 +161,25 @@ public class MainMenuActivity extends AppCompatActivity
         return true;
     }
 
-    public Session getSession() {
+    public static Session getSession() {
         return session;
     }
 
-    public void setSession(Session session) {
-        this.session = session;
+    public static void setSession(Session session) {
+        MainMenuActivity.session = session;
     }
 
     public void changeViewToProductDetails(Product product) {
         fragment = ProductDetailsFragment.newInstance(product);
+        mFragmentManager
+                .beginTransaction()
+                .replace(R.id.main_frame, fragment)
+                .addToBackStack(null)
+                .commit();
+    }
+
+    public void setBasketView() {
+        fragment = BasketFragment.newInstance(session.getOrder());
         mFragmentManager
                 .beginTransaction()
                 .replace(R.id.main_frame, fragment)

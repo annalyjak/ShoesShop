@@ -70,7 +70,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <Button
-                    android:id="@+id/button3"
+                    android:id="@+id/buttonAddBasket"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/roundcorner"

@@ -146,4 +146,8 @@ public class Product {
                 typeOfCollection,
                 pictures);
     }
+
+    public Size getSelectedSize() {
+        return selectedSize;
+    }
 }
