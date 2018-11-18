@@ -1,4 +1,4 @@
-package com.example.anna.shoesshop.controller;
+package com.example.anna.shoesshop.controller.fragments.additional;
 
 import android.content.Context;
 import android.os.Bundle;

@@ -3,11 +3,8 @@ package com.example.anna.shoesshop.controller.tasks;
 import android.app.Activity;
 import android.support.v7.widget.RecyclerView;
 
-import com.example.anna.shoesshop.controller.CategoriesFragment;
-import com.example.anna.shoesshop.model.product.Product;
+import com.example.anna.shoesshop.controller.fragments.requirements.CategoriesFragment;
 import com.example.anna.shoesshop.model.repo.LocalDatabase;
-
-import java.util.List;
 
 public class DownloadProductsTask extends ProgressTask<Void> {
 

@@ -1,6 +1,5 @@
-package com.example.anna.shoesshop.controller;
+package com.example.anna.shoesshop.controller.fragments.requirements;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;

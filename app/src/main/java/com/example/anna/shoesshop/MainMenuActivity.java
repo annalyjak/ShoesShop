@@ -11,18 +11,20 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 
-import com.example.anna.shoesshop.controller.AboutUsFragment;
-import com.example.anna.shoesshop.controller.BasketFragment;
-import com.example.anna.shoesshop.controller.CategoriesFragment;
-import com.example.anna.shoesshop.controller.FAQFragment;
-import com.example.anna.shoesshop.controller.FavouritesFragment;
-import com.example.anna.shoesshop.controller.ProductDetailsFragment;
+import com.example.anna.shoesshop.controller.fragments.additional.AboutUsFragment;
+import com.example.anna.shoesshop.controller.fragments.additional.AccountInfoFragment;
+import com.example.anna.shoesshop.controller.fragments.requirements.BasketFragment;
+import com.example.anna.shoesshop.controller.fragments.requirements.CategoriesFragment;
+import com.example.anna.shoesshop.controller.fragments.additional.FAQFragment;
+import com.example.anna.shoesshop.controller.fragments.requirements.FavouritesFragment;
+import com.example.anna.shoesshop.controller.fragments.ProductDetailsFragment;
 import com.example.anna.shoesshop.controller.adapters.DeliveryAdapter;
 import com.example.anna.shoesshop.model.product.Product;
 import com.example.anna.shoesshop.model.repo.DBHelper;
@@ -39,6 +41,7 @@ public class MainMenuActivity extends AppCompatActivity
     private Fragment fragment = null;
     private DBHelper database;
     private static Session session;
+    public static List<Product> productsCache;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,7 +86,13 @@ public class MainMenuActivity extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            if (mFragmentManager.getBackStackEntryCount() > 0) {
+                Log.i("MainActivity", "popping backstack");
+                mFragmentManager.popBackStack();
+            } else {
+                Log.i("MainActivity", "nothing on backstack, calling super");
+                super.onBackPressed();
+            }
         }
     }
 
@@ -131,11 +140,15 @@ public class MainMenuActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_home) {
-            fragment = CategoriesFragment.newInstance();
+            if (productsCache != null) {
+                fragment = CategoriesFragment.newInstance(productsCache);
+            } else {
+                fragment = CategoriesFragment.newInstance();
+            }
         } else if (id == R.id.nav_orders) {
 
         } else if (id == R.id.nav_my_profile) {
-
+            fragment = AccountInfoFragment.newInstance(session.getAccount());
         } else if (id == R.id.nav_fav_prod) {
             List<Product> list = new ArrayList<>();
             //TODO downoload from database
@@ -185,6 +198,18 @@ public class MainMenuActivity extends AppCompatActivity
                 .replace(R.id.main_frame, fragment)
                 .addToBackStack(null)
                 .commit();
+    }
+
+    public void getPreviousFragment() {
+        if (mFragmentManager.getBackStackEntryCount() > 0) {
+            Log.i("MainActivity", "popping backstack");
+            mFragmentManager.popBackStack();
+        }
+    }
+
+    public void setFragment(Fragment fragment) {
+        this.fragment = fragment;
+        setActuallFragment();
     }
 
     private void setActuallFragment() {

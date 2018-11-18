@@ -2,7 +2,7 @@ package com.example.anna.shoesshop.controller.tasks;
 
 import android.app.Activity;
 
-import com.example.anna.shoesshop.controller.FavouritesFragment;
+import com.example.anna.shoesshop.controller.fragments.requirements.FavouritesFragment;
 import com.example.anna.shoesshop.controller.adapters.FavouritesCardAdapter;
 import com.example.anna.shoesshop.model.product.Product;
 import com.example.anna.shoesshop.model.repo.LocalDatabase;

@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".controller.BasketFragment">
+    tools:context=".controller.fragments.requirements.BasketFragment">
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/no_fav_prod"

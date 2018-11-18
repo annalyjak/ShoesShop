@@ -1,17 +1,18 @@
-package com.example.anna.shoesshop.controller;
+package com.example.anna.shoesshop.controller.fragments.requirements;
 
-import android.content.Context;
-import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 
 import com.example.anna.shoesshop.MainMenuActivity;
@@ -20,6 +21,8 @@ import com.example.anna.shoesshop.controller.adapters.BasketCardAdapter;
 import com.example.anna.shoesshop.model.order.Delivery;
 import com.example.anna.shoesshop.model.product.Product;
 import com.example.anna.shoesshop.model.repo.DBHelper;
+import com.example.anna.shoesshop.model.repo.DialogUtil;
+import com.example.anna.shoesshop.model.repo.LocalDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +36,9 @@ public class BasketFragment extends Fragment {
     private RecyclerView.Adapter adapter;
     private View layoutNoRav;
     private Spinner deliverySpinner;
+    private Button buttonBuy;
+
+    private ArrayList<Delivery> deliveryList;
 
 //    private OnFragmentInteractionListener mListener;
 
@@ -70,12 +76,43 @@ public class BasketFragment extends Fragment {
         deliverySpinner = view.findViewById(R.id.spinner);
         setDeliverySpinner();
 
+        buttonBuy = view.findViewById(R.id.buttonBuy);
+        buttonBuy.setOnClickListener(view1 -> {
+            createNewOrder();
+            displayInfo();
+            new AsyncTask<Void, Void, Void>() {
+                @Override
+                protected Void doInBackground(Void... params) {
+                    clearSession();
+                    return null;
+                }
+            }.execute();
+
+        });
+
         return view;
+    }
+
+    private void displayInfo() {
+        DialogUtil.createDialog(getActivity(), "ZAKUP", "Zamówienie zostało złożone");
+    }
+
+    private void clearSession() {
+        MainMenuActivity.getSession().clearOrder();
+        Log.i("TAG", "Session cleard");
+        ((MainMenuActivity) getActivity()).getPreviousFragment();
+    }
+
+    private void createNewOrder() {
+        Delivery selectedDelivery = deliveryList.get(deliverySpinner.getSelectedItemPosition());
+
+        LocalDatabase localDatabase = new LocalDatabase(getContext());
+        localDatabase.saveNewOrder(orderedProducts, selectedDelivery);
     }
 
     private void setDeliverySpinner() {
         ArrayList<String> delivery = new ArrayList<>();
-        ArrayList<Delivery> deliveryList = DBHelper.getDeliveryList();
+        deliveryList = DBHelper.getDeliveryList();
         for (Delivery delivery1 : deliveryList) {
             delivery.add(delivery1.getDeliveryFirmName() + " - " + delivery1.getPriceOfDelivery());
         }
@@ -90,40 +127,4 @@ public class BasketFragment extends Fragment {
         ((MainMenuActivity) Objects.requireNonNull(getActivity())).setBasketView();
     }
 
-//    public void onButtonPressed(Uri uri) {
-//        if (mListener != null) {
-//            mListener.onFragmentInteraction(uri);
-//        }
-//    }
-//
-//    @Override
-//    public void onAttach(Context context) {
-//        super.onAttach(context);
-//        if (context instanceof OnFragmentInteractionListener) {
-//            mListener = (OnFragmentInteractionListener) context;
-//        } else {
-//            throw new RuntimeException(context.toString()
-//                    + " must implement OnFragmentInteractionListener");
-//        }
-//    }
-//
-//    @Override
-//    public void onDetach() {
-//        super.onDetach();
-//        mListener = null;
-//    }
-//
-//    /**
-//     * This interface must be implemented by activities that contain this
-//     * fragment to allow an interaction in this fragment to be communicated
-//     * to the activity and potentially other fragments contained in that
-//     * activity.
-//     * <p>
-//     * See the Android Training lesson <a href=
-//     * "http://developer.android.com/training/basics/fragments/communicating.html"
-//     * >Communicating with Other Fragments</a> for more information.
-//     */
-//    public interface OnFragmentInteractionListener {
-//        void onFragmentInteraction(Uri uri);
-//    }
 }

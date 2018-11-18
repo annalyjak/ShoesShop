@@ -1,4 +1,4 @@
-package com.example.anna.shoesshop.controller;
+package com.example.anna.shoesshop.controller.fragments;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import com.example.anna.shoesshop.MainMenuActivity;
 import com.example.anna.shoesshop.R;
+import com.example.anna.shoesshop.controller.PicturesActivity;
 import com.example.anna.shoesshop.model.product.Product;
 import com.example.anna.shoesshop.model.repo.DBUtil;
 

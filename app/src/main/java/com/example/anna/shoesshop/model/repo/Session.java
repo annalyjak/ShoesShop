@@ -32,4 +32,8 @@ public class Session {
             order.remove(product);
         }
     }
+
+    public void clearOrder() {
+        order = new ArrayList<>();
+    }
 }

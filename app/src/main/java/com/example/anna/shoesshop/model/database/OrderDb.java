@@ -10,17 +10,30 @@ import io.realm.RealmList;
 import io.realm.RealmObject;
 
 public class OrderDb extends RealmObject {
-    private long numberOfOrder; //TODO test
+    private long numberOfOrder;
     private RealmList<ProductDb> products;
 
     private Address address;
     private ClientDb client;
-    private Date dateOfOrder; //TODO test
+    private Date dateOfOrder;
 
-    private Date dateOfDelivery; //TODO test
+    private Date dateOfDelivery;
     private DeliveryDb deliveryInformation;
 
     private StatusDb statusOfOrder;
+
+    public OrderDb() {
+    }
+
+    public OrderDb(long numberOfOrder, RealmList<ProductDb> products, Address address, ClientDb client, Date dateOfOrder, DeliveryDb deliveryInformation, StatusDb statusOfOrder) {
+        this.numberOfOrder = numberOfOrder;
+        this.products = products;
+        this.address = address;
+        this.client = client;
+        this.dateOfOrder = dateOfOrder;
+        this.deliveryInformation = deliveryInformation;
+        this.statusOfOrder = statusOfOrder;
+    }
 
     public long getNumberOfOrder() {
         return numberOfOrder;

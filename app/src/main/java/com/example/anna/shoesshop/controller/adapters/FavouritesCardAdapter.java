@@ -13,7 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.anna.shoesshop.R;
-import com.example.anna.shoesshop.controller.FavouritesFragment;
+import com.example.anna.shoesshop.controller.fragments.requirements.FavouritesFragment;
 import com.example.anna.shoesshop.controller.tasks.DeleteProductFromFavTask;
 import com.example.anna.shoesshop.model.product.Product;
 

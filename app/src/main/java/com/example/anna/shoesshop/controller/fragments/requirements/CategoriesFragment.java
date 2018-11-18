@@ -1,4 +1,4 @@
-package com.example.anna.shoesshop.controller;
+package com.example.anna.shoesshop.controller.fragments.requirements;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
@@ -17,7 +17,6 @@ import android.widget.ImageView;
 import com.example.anna.shoesshop.MainMenuActivity;
 import com.example.anna.shoesshop.R;
 import com.example.anna.shoesshop.controller.adapters.CategoriesCardAdapter;
-import com.example.anna.shoesshop.controller.tasks.DownloadProductsTask;
 import com.example.anna.shoesshop.model.product.Product;
 import com.example.anna.shoesshop.model.repo.LocalDatabase;
 
@@ -154,6 +153,7 @@ public class CategoriesFragment extends Fragment {
     private void getListOfAllProducts() {
         LocalDatabase localDatabase = new LocalDatabase(getActivity().getApplicationContext());
         products = localDatabase.getAllProducts();
+        MainMenuActivity.productsCache = products;
 
         Log.i("TAG", "SIZE : " + products.size());
         changeViewUsingAdapter();

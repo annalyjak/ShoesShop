@@ -8,11 +8,17 @@ import android.graphics.PorterDuff;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 
+import com.example.anna.shoesshop.MainMenuActivity;
 import com.example.anna.shoesshop.R;
+import com.example.anna.shoesshop.model.Address;
 import com.example.anna.shoesshop.model.database.AccountDb;
 import com.example.anna.shoesshop.model.database.ClientDb;
+import com.example.anna.shoesshop.model.database.DeliveryDb;
+import com.example.anna.shoesshop.model.database.OrderDb;
 import com.example.anna.shoesshop.model.database.ProductDb;
 import com.example.anna.shoesshop.model.database.enums.SizeDb;
+import com.example.anna.shoesshop.model.database.enums.StatusDb;
+import com.example.anna.shoesshop.model.order.Delivery;
 import com.example.anna.shoesshop.model.order.Order;
 import com.example.anna.shoesshop.model.order.Status;
 import com.example.anna.shoesshop.model.product.Category;
@@ -25,7 +31,9 @@ import com.example.anna.shoesshop.model.userInfo.Client;
 import com.example.anna.shoesshop.model.userInfo.Gender;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 import io.realm.Realm;
 import io.realm.RealmList;
@@ -457,6 +465,36 @@ public class LocalDatabase implements DBHelper {
 
         realm.commitTransaction();
         Log.i("REALM_TEST", "Deleting");
+
+    }
+
+    public void saveNewOrder(List<Product> orderedProducts, Delivery selectedDelivery) {
+        AccountDb accountDb = getAccountDb(getLoggedAccount());
+        Address address = new Address(); // default
+        RealmList<ProductDb> productDbs = new RealmList<>();
+        for (Product p : orderedProducts) {
+            productDbs.add(getProductDb(p));
+        }
+        Date dateOfOrder = new Date(System.currentTimeMillis());
+
+        Random random = new Random();
+        long id = dateOfOrder.getTime() + random.nextInt();
+
+        DeliveryDb deliveryDb = new DeliveryDb(selectedDelivery);
+
+        StatusDb statusDb = new StatusDb(Status.during);
+
+        OrderDb orderDb = new OrderDb(id,
+                productDbs,
+                address,
+                accountDb.getClient(),
+                dateOfOrder,
+                deliveryDb,
+                statusDb);
+
+        realm.beginTransaction();
+        realm.copyToRealm(orderDb);
+        realm.commitTransaction();
 
     }
 }

@@ -16,7 +16,7 @@ import android.widget.TextView;
 
 import com.example.anna.shoesshop.MainMenuActivity;
 import com.example.anna.shoesshop.R;
-import com.example.anna.shoesshop.controller.BasketFragment;
+import com.example.anna.shoesshop.controller.fragments.requirements.BasketFragment;
 import com.example.anna.shoesshop.model.product.Product;
 
 import java.util.ArrayList;
@@ -89,7 +89,7 @@ public class BasketCardAdapter extends RecyclerView.Adapter<BasketCardAdapter.Vi
         this.notifyDataSetChanged();
     }
 
-    public boolean hasEmptyFavList() {
+    public boolean hasEmptyList() {
         return dataset.isEmpty();
     }
 

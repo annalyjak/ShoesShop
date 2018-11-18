@@ -2,6 +2,7 @@ package com.example.anna.shoesshop.model.database;
 
 import com.example.anna.shoesshop.model.Price;
 import com.example.anna.shoesshop.model.database.enums.TypeOfDeliveryDb;
+import com.example.anna.shoesshop.model.order.Delivery;
 import com.example.anna.shoesshop.model.order.TypeOfDelivery;
 import com.example.anna.shoesshop.model.repo.DBUtil;
 
@@ -14,6 +15,13 @@ public class DeliveryDb extends RealmObject {
     private Price priceOfDelivery;
 
     public DeliveryDb() {
+    }
+
+    public DeliveryDb(Delivery delivery) {
+        this.typeOfDelivery = DBUtil.transferToEnum(delivery.getTypeOfDelivery());
+        this.deliveryFirmName = delivery.getDeliveryFirmName();
+        this.deliveryTime = delivery.getDeliveryTime();
+        this.priceOfDelivery = delivery.getPriceOfDelivery();
     }
 
     public DeliveryDb(TypeOfDeliveryDb typeOfDelivery, String deliveryFirmName, String deliveryTime, Price priceOfDelivery) {
