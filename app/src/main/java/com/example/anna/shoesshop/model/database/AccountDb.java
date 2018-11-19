@@ -126,4 +126,11 @@ public class AccountDb extends RealmObject {
             favourites.remove(productDb);
         }
     }
+
+    public void addOrderToList(OrderDb orderDb) {
+        if (orders == null) {
+            orders = new RealmList<>();
+        }
+        orders.add(orderDb);
+    }
 }

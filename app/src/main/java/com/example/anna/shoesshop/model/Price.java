@@ -20,6 +20,10 @@ public class Price extends RealmObject {
         this.actuallPrice = normalPrice;
     }
 
+    public double getActuallPrice() {
+        return actuallPrice;
+    }
+
     @SuppressLint("DefaultLocale")
     @Override
     public String toString() {

@@ -18,8 +18,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 
+import com.example.anna.shoesshop.controller.adapters.OrdersCardAdapter;
 import com.example.anna.shoesshop.controller.fragments.additional.AboutUsFragment;
 import com.example.anna.shoesshop.controller.fragments.additional.AccountInfoFragment;
+import com.example.anna.shoesshop.controller.fragments.additional.OrdersFragment;
 import com.example.anna.shoesshop.controller.fragments.requirements.BasketFragment;
 import com.example.anna.shoesshop.controller.fragments.requirements.CategoriesFragment;
 import com.example.anna.shoesshop.controller.fragments.additional.FAQFragment;
@@ -146,7 +148,7 @@ public class MainMenuActivity extends AppCompatActivity
                 fragment = CategoriesFragment.newInstance();
             }
         } else if (id == R.id.nav_orders) {
-
+            fragment = OrdersFragment.newInstance();
         } else if (id == R.id.nav_my_profile) {
             fragment = AccountInfoFragment.newInstance(session.getAccount());
         } else if (id == R.id.nav_fav_prod) {

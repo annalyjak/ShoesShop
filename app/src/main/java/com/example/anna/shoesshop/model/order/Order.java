@@ -7,7 +7,6 @@ import com.example.anna.shoesshop.model.product.Product;
 import com.example.anna.shoesshop.model.repo.DBUtil;
 import com.example.anna.shoesshop.model.userInfo.Client;
 
-import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
 
@@ -26,9 +25,24 @@ public class Order {
 
 //    private Price totalPriceOfOrder;
 
+    public int getNumberOfProducts(){
+        if (products == null || products.isEmpty()) {
+            return 0;
+        } else {
+            return products.size();
+        }
+    }
+
+    public Date getDateOfOrder() {
+        return dateOfOrder;
+    }
+
     public Price getTotalPriceOfOrder() {
         double total = 0.0;
-//        total += products.stream().mapToDouble(p -> (double) p.getPrice()).sum();
+        total += deliveryInformation.getPriceOfDelivery().getActuallPrice();
+        for (Product product : products) {
+            total += product.getPrice().getActuallPrice();
+        }
         return new Price(total, "PLN");
     }
 

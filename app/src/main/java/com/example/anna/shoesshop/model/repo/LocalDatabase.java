@@ -493,8 +493,7 @@ public class LocalDatabase implements DBHelper {
                 statusDb);
 
         realm.beginTransaction();
-        realm.copyToRealm(orderDb);
+        accountDb.addOrderToList(orderDb);
         realm.commitTransaction();
-
     }
 }
