@@ -19,6 +19,7 @@ import com.example.anna.shoesshop.R;
 import com.example.anna.shoesshop.controller.adapters.CategoriesCardAdapter;
 import com.example.anna.shoesshop.model.product.Product;
 import com.example.anna.shoesshop.model.repo.LocalDatabase;
+import com.example.anna.shoesshop.model.repo.Session;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -153,7 +154,7 @@ public class CategoriesFragment extends Fragment {
     private void getListOfAllProducts() {
         LocalDatabase localDatabase = new LocalDatabase(getActivity().getApplicationContext());
         products = localDatabase.getAllProducts();
-        MainMenuActivity.productsCache = products;
+        Session.setProductsCache(products);
 
         Log.i("TAG", "SIZE : " + products.size());
         changeViewUsingAdapter();

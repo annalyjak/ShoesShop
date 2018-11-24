@@ -31,5 +31,16 @@
     <string name="title_activity_pictures">PicturesActivity</string>
     <string name="section_format">Hello World from section: %1$d</string>
 
+    <string name="woman_shoes">OBUWIE DAMSKIE</string>
+    <string name="woman_clothes">ODZIEŻ DAMSKA</string>
+    <string name="woman_accessories">AKCESORIA DAMSKIE</string>
+    <string name="man_shoes">OBUWIE MĘSKIE</string>
+    <string name="man_clothes">ODZIEŻ MĘSKA</string>
+    <string name="man_accessories">AKCESORIA MĘSKIE</string>
+    <string name="kid_shoes">OBUWIE DZIECIĘCE</string>
+    <string name="kid_clothes">ODZIEŻ DZIECIĘCA</string>
+    <string name="kid_accessories">AKCESORIA DZIECIĘCE</string>
+
+
 
 </resources>

@@ -9,6 +9,7 @@ import java.util.List;
 public class Session {
     private Account account;
     private List<Product> order;
+    private static List<Product> productsCache;
 
     public Session(DBHelper helper) {
         account = helper.getLoggedAccount();
@@ -28,12 +29,18 @@ public class Session {
     }
 
     public void removeProductFromBasket(Product product) {
-        if (order.contains(product)) {
-            order.remove(product);
-        }
+        order.remove(product);
     }
 
     public void clearOrder() {
         order = new ArrayList<>();
+    }
+
+    static List<Product> getProductsCache() {
+        return productsCache;
+    }
+
+    public static void setProductsCache(List<Product> productsCache) {
+        Session.productsCache = productsCache;
     }
 }

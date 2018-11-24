@@ -110,6 +110,9 @@ public class LocalDatabase implements DBHelper {
 
     @Override
     public List<Product> getAllProducts() {
+        if (Session.getProductsCache() != null) {
+            return Session.getProductsCache();
+        }
         RealmResults<ProductDb> allAsync = realm.where(ProductDb.class).findAllAsync();
         allAsync.load();
         List<ProductDb> allProducts = realm.copyFromRealm(allAsync);

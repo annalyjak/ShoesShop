@@ -28,6 +28,7 @@ import com.example.anna.shoesshop.controller.fragments.additional.FAQFragment;
 import com.example.anna.shoesshop.controller.fragments.requirements.FavouritesFragment;
 import com.example.anna.shoesshop.controller.fragments.ProductDetailsFragment;
 import com.example.anna.shoesshop.controller.adapters.DeliveryAdapter;
+import com.example.anna.shoesshop.controller.fragments.requirements.SearchFragment;
 import com.example.anna.shoesshop.model.product.Product;
 import com.example.anna.shoesshop.model.repo.DBHelper;
 import com.example.anna.shoesshop.model.repo.LocalDatabase;
@@ -43,7 +44,6 @@ public class MainMenuActivity extends AppCompatActivity
     private Fragment fragment = null;
     private DBHelper database;
     private static Session session;
-    public static List<Product> productsCache;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -142,11 +142,12 @@ public class MainMenuActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_home) {
-            if (productsCache != null) {
-                fragment = CategoriesFragment.newInstance(productsCache);
-            } else {
-                fragment = CategoriesFragment.newInstance();
-            }
+            fragment = SearchFragment.newInstance();
+//            if (productsCache != null) {
+//                fragment = CategoriesFragment.newInstance(productsCache);
+//            } else {
+//                fragment = CategoriesFragment.newInstance();
+//            }
         } else if (id == R.id.nav_orders) {
             fragment = OrdersFragment.newInstance();
         } else if (id == R.id.nav_my_profile) {
