@@ -25,7 +25,7 @@ public class ProductDb extends RealmObject {
     private CategoryDb category;
     private CollectionDb typeOfCollection;
     //generalInfo
-    private long numberOfProduct; //TODO is needed?
+    private long numberOfProduct;
     private Price normalPrice;
     private Price price;
     private String name;

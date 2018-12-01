@@ -52,9 +52,8 @@ public class DBUtil {
         return Gender.valueOf(sex.toString());
     }
 
-    //TODO
     public static OrderDb transferToEnum(Order order){
-        return new OrderDb();
+        return order.transfer();
     }
 
     public static Order transferToEnum(OrderDb order){
@@ -75,6 +74,10 @@ public class DBUtil {
 
     public static Delivery transferToEnum(DeliveryDb deliveryInformation) {
         return new Delivery(deliveryInformation);
+    }
+
+    public static DeliveryDb transferToEnum(Delivery deliveryInformation) {
+        return new DeliveryDb(deliveryInformation);
     }
 
     public static ProductDb transferToEnum(Product product){
@@ -143,25 +146,23 @@ public class DBUtil {
 
     public static Size transferToEnum(SizeDb selectedSize) {
         switch (selectedSize.toString()){
-            case ("woman36"): return Size.woman36;
-            case ("woman37"): return Size.woman37;
-            case ("woman38"): return Size.woman38;
-            case ("woman39"): return Size.woman39;
-            case ("woman40"): return Size.woman40;
-            case ("woman41"): return Size.woman41;
-            case ("woman42"): return Size.woman42;
-            case ("man41"): return Size.man41;
-            case ("man42"): return Size.man42;
-            case ("man43"): return Size.man43;
-            case ("man44"): return Size.man44;
-            case ("man45"): return Size.man45;
-            case ("man46"): return Size.man46;
-            case ("kid30"): return Size.kid30;
-            case ("kid31"): return Size.kid31;
-            case ("kid32"): return Size.kid32;
-            case ("kid33"): return Size.kid33;
-            case ("kid34"): return Size.kid34;
-            case ("kid35"): return Size.kid35;
+            case ("36"): return Size.woman36;
+            case ("37"): return Size.woman37;
+            case ("38"): return Size.woman38;
+            case ("39"): return Size.woman39;
+            case ("40"): return Size.woman40;
+            case ("41"): return Size.woman41;
+            case ("42"): return Size.woman42;
+            case ("43"): return Size.man43;
+            case ("44"): return Size.man44;
+            case ("45"): return Size.man45;
+            case ("46"): return Size.man46;
+            case ("30"): return Size.kid30;
+            case ("31"): return Size.kid31;
+            case ("32"): return Size.kid32;
+            case ("33"): return Size.kid33;
+            case ("34"): return Size.kid34;
+            case ("35"): return Size.kid35;
 
         }
         return Size.universal;
@@ -188,8 +189,8 @@ public class DBUtil {
         return result;
     }
 
-    public static List<ProductDb> transferFromEnumProductList(List<Product> list){
-        ArrayList<ProductDb> result = new ArrayList<>();
+    public static RealmList<ProductDb> transferFromEnumProductList(List<Product> list){
+        RealmList<ProductDb> result = new RealmList<>();
         for (Product o : list) {
             result.add(DBUtil.transferToEnum(o));
         }

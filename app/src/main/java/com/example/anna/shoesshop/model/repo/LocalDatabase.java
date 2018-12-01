@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.PorterDuff;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.util.AsyncListUtil;
 import android.util.Log;
 
 import com.example.anna.shoesshop.MainMenuActivity;
@@ -233,14 +234,19 @@ public class LocalDatabase implements DBHelper {
     }
 
     // MANIPULACJA NA DANYCH Z BAZY
-    public void addProduct(ProductDb productDb) {
-        // Copy to Realm
+    public static void addProducts(Context context, List<ProductDb> productDb) {
+        Realm.init(context);
+        Realm realm = Realm.getDefaultInstance();
+//         Copy to Realm
         realm.beginTransaction();
-        realm.copyToRealm(productDb);
+        for (ProductDb p: productDb) {
+            realm.copyToRealm(p);
+        }
         realm.commitTransaction();
+        realm.close();
     }
 
-    public static void addProducts(Context context) {
+    public static RealmList<SizeDb> getWomanSizes() {
         RealmList<SizeDb> sizes = new RealmList<>();
         sizes.add(new SizeDb(Size.woman36));
         sizes.add(new SizeDb(Size.woman37));
@@ -248,6 +254,296 @@ public class LocalDatabase implements DBHelper {
         sizes.add(new SizeDb(Size.woman39));
         sizes.add(new SizeDb(Size.woman40));
         sizes.add(new SizeDb(Size.woman41));
+        return sizes;
+    }
+
+    public static RealmList<SizeDb> getManSizes() {
+        RealmList<SizeDb> sizes = new RealmList<>();
+        sizes.add(new SizeDb(Size.man41));
+        sizes.add(new SizeDb(Size.man42));
+        sizes.add(new SizeDb(Size.man43));
+        sizes.add(new SizeDb(Size.man44));
+        sizes.add(new SizeDb(Size.man45));
+        sizes.add(new SizeDb(Size.man46));
+        return sizes;
+    }
+
+    public static RealmList<SizeDb> getKidSizes() {
+        RealmList<SizeDb> sizes = new RealmList<>();
+        sizes.add(new SizeDb(Size.kid30));
+        sizes.add(new SizeDb(Size.kid31));
+        sizes.add(new SizeDb(Size.kid32));
+        sizes.add(new SizeDb(Size.kid33));
+        sizes.add(new SizeDb(Size.kid34));
+        sizes.add(new SizeDb(Size.kid35));
+        return sizes;
+    }
+
+    public static RealmList<SizeDb> getUniversalSizes() {
+        RealmList<SizeDb> sizes = new RealmList<>();
+        sizes.add(new SizeDb(Size.universal));
+        return sizes;
+    }
+
+    public static void addKidProducts(Context context) {
+        List<Bitmap> bitmaps1 = createListOfPictures(context,
+                R.drawable.bo5,
+                R.drawable.bo4,
+                R.drawable.bo6,
+                R.drawable.bo7);
+        ProductDb pr1 = ProductDb.newInstance("Botki Love Winter",
+                Category.shoes,
+                getKidSizes(),
+                78576,
+                49.99,
+                Type.kid,
+                Collection.winter,
+                bitmaps1
+        );
+
+        List<Bitmap> bitmaps2 = createListOfPictures(context,
+                R.drawable.sn1,
+                R.drawable.sn2,
+                R.drawable.sn3,
+                R.drawable.sn4);
+        ProductDb pr2 = ProductDb.newInstance("Śniegowce Awards",
+                Category.shoes, getKidSizes(),
+                28329,
+                69.99,
+                Type.kid,
+                Collection.winter,
+                bitmaps2
+        );
+
+        List<Bitmap> bitmaps3 = createListOfPictures(context,
+                R.drawable.kur6,
+                R.drawable.kur14);
+        ProductDb pr3 = ProductDb.newInstance("Kurtka Frozen Skill",
+                Category.clothes, getUniversalSizes(),
+                74196,
+                219.99,
+                Type.kid,
+                Collection.winter,
+                bitmaps3
+        );
+
+        List<Bitmap> bitmaps4 = createListOfPictures(context,
+                R.drawable.rek22,
+                R.drawable.rek23,
+                R.drawable.rek24);
+        ProductDb pr4 = ProductDb.newInstance("Rękawiczki Defender",
+                Category.accessories,
+                getUniversalSizes(),
+                75815,
+                14.99,
+                Type.kid,
+                Collection.winter,
+                bitmaps4
+        );
+
+        ArrayList<ProductDb> productDbs = new ArrayList<>();
+        productDbs.add(pr1);
+        productDbs.add(pr2);
+        productDbs.add(pr3);
+        productDbs.add(pr4);
+
+        addProducts(context, productDbs);
+    }
+
+    public static void addMProcucts(Context context) {
+        List<Bitmap> bitmaps1 = createListOfPictures(context,
+                R.drawable.botm1,
+                R.drawable.botm3,
+                R.drawable.botm4,
+                R.drawable.botm12);
+        ProductDb pr1 = ProductDb.newInstance("Botki Retrofuture",
+                Category.shoes, getManSizes(),
+                24258,
+                129.99,
+                Type.men,
+                Collection.autumn,
+                bitmaps1
+        );
+
+        List<Bitmap> bitmaps2 = createListOfPictures(context,
+                R.drawable.bluza1,
+                R.drawable.bluza2,
+                R.drawable.bluza3,
+                R.drawable.bluza4);
+        ProductDb pr2 = ProductDb.newInstance("Bluza Enclosure",
+                Category.clothes,
+                getUniversalSizes(),
+                28865,
+                156.99,
+                Type.men,
+                Collection.autumn,
+                bitmaps2
+        );
+
+        List<Bitmap> bitmaps3 = createListOfPictures(context,
+                R.drawable.torba20,
+                R.drawable.torba17,
+                R.drawable.torba19,
+                R.drawable.torba18);
+        ProductDb pr3 = ProductDb.newInstance("Torba Roll It Over",
+                Category.accessories,
+                getUniversalSizes(),
+                73025,
+                46.99,
+                Type.men,
+                Collection.summer,
+                bitmaps3
+        );
+
+        ArrayList<ProductDb> productDbs = new ArrayList<>();
+        productDbs.add(pr1);
+        productDbs.add(pr2);
+        productDbs.add(pr3);
+
+        addProducts(context, productDbs);
+    }
+
+    public static void addWomanClothes(Context context) {
+        RealmList<SizeDb> sizes = getUniversalSizes();
+        List<Bitmap> bitmaps1 = createListOfPictures(context,
+                R.drawable.scarcity1,
+                R.drawable.scarcity2,
+                R.drawable.scarcity3,
+                R.drawable.scarcity4);
+
+        ProductDb pr1 = ProductDb.newInstance("Szara Sukienka Scarcity",
+                Category.clothes, sizes,
+                81292,
+                79.99,
+                119.99,
+                Type.women,
+                Collection.winter,
+                bitmaps1
+        );
+
+        List<Bitmap> bitmaps2 = createListOfPictures(context,
+                R.drawable.kurtka1,
+                R.drawable.kurtka2,
+                R.drawable.kurtka3,
+                R.drawable.kurtka4);
+        ProductDb pr2 = ProductDb.newInstance("Kurtka Milk&Honey",
+                Category.clothes, sizes,
+                82469,
+                249.99,
+                Type.women,
+                Collection.winter,
+                bitmaps2
+        );
+
+        List<Bitmap> bitmaps3 = createListOfPictures(context,
+                R.drawable.legg1,
+                R.drawable.legg2,
+                R.drawable.legg4,
+                R.drawable.legg5);
+        ProductDb pr3 = ProductDb.newInstance("Legginsy Uncontrolled",
+                Category.clothes, sizes,
+                82368,
+                69.99,
+                Type.women,
+                Collection.spring,
+                bitmaps3
+        );
+
+        List<Bitmap> bitmaps4 = createListOfPictures(context,
+                R.drawable.mar1,
+                R.drawable.mar2,
+                R.drawable.mar3,
+                R.drawable.mar4);
+        ProductDb pr4 = ProductDb.newInstance("Marynarka Formally",
+                Category.clothes, sizes,
+                42659,
+                79.99,
+                179.99,
+                Type.women,
+                Collection.spring,
+                bitmaps4
+        );
+
+        ArrayList<ProductDb> productDbs = new ArrayList<>();
+        productDbs.add(pr1);
+        productDbs.add(pr2);
+        productDbs.add(pr3);
+        productDbs.add(pr4);
+
+        addProducts(context, productDbs);
+    }
+
+    public static void addWomanAccessories(Context context) {
+        RealmList<SizeDb> sizes = getUniversalSizes();
+        List<Bitmap> bitmaps1 = createListOfPictures(context,
+                R.drawable.szal1,
+                R.drawable.szal2,
+                R.drawable.szal3,
+                R.drawable.szal23);
+
+        ProductDb pr1 = ProductDb.newInstance("Szalik Jocularity",
+                Category.accessories, sizes,
+                74728,
+                29.99,
+                Type.women,
+                Collection.autumn,
+                bitmaps1
+        );
+
+        List<Bitmap> bitmaps2 = createListOfPictures(context,
+                R.drawable.bag17,
+                R.drawable.bag18,
+                R.drawable.bag19,
+                R.drawable.bag20);
+        ProductDb pr2 = ProductDb.newInstance("Torebka My Tears",
+                Category.accessories, sizes,
+                72323,
+                89.99,
+                Type.women,
+                Collection.summer,
+                bitmaps2
+        );
+
+        List<Bitmap> bitmaps3 = createListOfPictures(context,
+                R.drawable.plec,
+                R.drawable.plec20,
+                R.drawable.plec17,
+                R.drawable.plec18);
+        ProductDb pr3 = ProductDb.newInstance("Plecak The Tropics",
+                Category.accessories, sizes,
+                69372,
+                19.99,
+                Type.women,
+                Collection.summer,
+                bitmaps3
+        );
+
+        List<Bitmap> bitmaps4 = createListOfPictures(context,
+                R.drawable.beret5,
+                R.drawable.beret7,
+                R.drawable.beret30,
+                R.drawable.beret31);
+        ProductDb pr4 = ProductDb.newInstance("Camelowy Beret French",
+                Category.accessories, sizes,
+                29431,
+                54.99,
+                Type.women,
+                Collection.autumn,
+                bitmaps4
+        );
+
+        ArrayList<ProductDb> productDbs = new ArrayList<>();
+        productDbs.add(pr1);
+        productDbs.add(pr2);
+        productDbs.add(pr3);
+        productDbs.add(pr4);
+
+        addProducts(context, productDbs);
+    }
+
+
+    public static void addProducts(Context context) {
+        RealmList<SizeDb> sizes = getWomanSizes();
 
         List<Bitmap> bitmaps1 = createListOfPictures(context,
                 R.drawable.sz1,
@@ -303,17 +599,12 @@ public class LocalDatabase implements DBHelper {
                 Collection.winter,
                 bitmaps4
         );
-        Realm.init(context);
-        Realm realm = Realm.getDefaultInstance();
-
-        realm.beginTransaction();
-        realm.copyToRealm(pr1);
-        realm.copyToRealm(pr2);
-        realm.copyToRealm(pr3);
-        realm.copyToRealm(pr4);
-        realm.commitTransaction();
-
-        realm.close();
+        ArrayList<ProductDb> productDbs = new ArrayList<>();
+        productDbs.add(pr1);
+        productDbs.add(pr2);
+        productDbs.add(pr3);
+        productDbs.add(pr4);
+        addProducts(context, productDbs);
     }
 
     private static List<Bitmap> createListOfPictures(Context context, int id1, int id2, int id3, int id4){
@@ -333,134 +624,14 @@ public class LocalDatabase implements DBHelper {
         return bitmaps;
     }
 
+    private static List<Bitmap> createListOfPictures(Context context, int... id1){
+        List<Bitmap> bitmaps = new ArrayList<>();
+        for(int i = 0; i < id1.length; i++) {
+            bitmaps.add(BitmapFactory.decodeResource(context.getResources(), id1[i]));
+        }
+        return bitmaps;
+    }
 
-//    public static void addProducts2(Context context){
-//
-//        Realm.init(context);
-//        Realm realm = Realm.getDefaultInstance();
-//
-        // Creating products:
-//        ProductDb productDb = new ProductDb();
-//        productDb.setCategory(new CategoryDb(Category.shoes));
-//        productDb.setName("Beżowe Szpilki Ombre");
-//        RealmList<SizeDb> sizes = new RealmList<>();
-//        sizes.add(new SizeDb(Size.woman36));
-//        sizes.add(new SizeDb(Size.woman37));
-//        sizes.add(new SizeDb(Size.woman38));
-//        sizes.add(new SizeDb(Size.woman39));
-//        sizes.add(new SizeDb(Size.woman40));
-//        sizes.add(new SizeDb(Size.woman41));
-//        productDb.setListOfSizes(sizes);
-//        productDb.setNumberOfProduct(6577);
-//        productDb.setPrice(new Price(39.99, "ZŁ"));
-//        productDb.setTypeOfProduct(new TypeDb(Type.women));
-//        productDb.setTypeOfCollection(Collection.winter);
-//        Bitmap b1 = BitmapFactory.decodeResource(context.getResources(),
-//                R.drawable.sz1);
-//        Bitmap b2 = BitmapFactory.decodeResource(context.getResources(),
-//                R.drawable.sz2);
-//        Bitmap b3 = BitmapFactory.decodeResource(context.getResources(),
-//                R.drawable.sz4);
-//        Bitmap b4 = BitmapFactory.decodeResource(context.getResources(),
-//                R.drawable.sz5);
-//        List<Bitmap> bitmaps = new ArrayList<>();
-//        bitmaps.add(b1);
-//        bitmaps.add(b2);
-//        bitmaps.add(b3);
-//        bitmaps.add(b4);
-//        RealmList<byte[]> pictures = DBUtil.transferToByteArray(bitmaps);
-//        productDb.setPictures(pictures);
-//
-//        ProductDb productDb1 = new ProductDb();
-//        productDb1.setCategory(new CategoryDb(Category.shoes));
-//        productDb1.setName("Sportowe Rising Day");
-//        productDb1.setListOfSizes(sizes);
-//        productDb1.setNumberOfProduct(18716);
-//        productDb1.setPrice(new Price(49.99, "ZŁ"));
-//        productDb1.setTypeOfProduct(new TypeDb(Type.women));
-//        productDb1.setTypeOfCollection(Collection.winter);
-//        Bitmap b11 = BitmapFactory.decodeResource(context.getResources(),
-//                R.drawable.sp1);
-//        Bitmap b21 = BitmapFactory.decodeResource(context.getResources(),
-//                R.drawable.sp2);
-//        Bitmap b31 = BitmapFactory.decodeResource(context.getResources(),
-//                R.drawable.sp3);
-//        Bitmap b41 = BitmapFactory.decodeResource(context.getResources(),
-//                R.drawable.sp4);
-//        List<Bitmap> bitmaps1 = new ArrayList<>();
-//        bitmaps1.add(b11);
-//        bitmaps1.add(b21);
-//        bitmaps1.add(b31);
-//        bitmaps1.add(b41);
-//        RealmList<byte[]> pictures1 = DBUtil.transferToByteArray(bitmaps1);
-//        productDb1.setPictures(pictures1);
-//
-//        List<ProductDb> products = new ArrayList<>();
-//        products.add(productDb);
-//        products.add(productDb1);
-//
-//        // Copy to Realm
-//        realm.beginTransaction();
-//        realm.copyToRealm(products);
-//        realm.commitTransaction();
-//
-//        //finding
-//        RealmResults<ProductDb> allAsync = realm.where(ProductDb.class).findAllAsync();
-//        allAsync.load();
-//        Log.i("REALM_TEST", "" + allAsync.get(0).toString());
-//
-//        Log.i("REALM_TEST", "" + allAsync.size());
-//    }
-//
-//    public static void addProduct(Context context){
-//
-//        Realm.init(context);
-//        Realm realm = Realm.getDefaultInstance();
-//
-//        // Creating products:
-//        ProductDb productDb = new ProductDb();
-//        productDb.setCategory(new CategoryDb(Category.shoes));
-//        productDb.setName("Szare Traperki Fancy Crazy");
-//        RealmList<SizeDb> sizes = new RealmList<>();
-//        sizes.add(new SizeDb(Size.woman36));
-//        sizes.add(new SizeDb(Size.woman37));
-//        sizes.add(new SizeDb(Size.woman38));
-//        sizes.add(new SizeDb(Size.woman39));
-//        sizes.add(new SizeDb(Size.woman40));
-//        sizes.add(new SizeDb(Size.woman41));
-//        productDb.setListOfSizes(sizes);
-//        productDb.setNumberOfProduct(27388);
-//        productDb.setPrice(new Price(99.99, "ZŁ"));
-//        productDb.setTypeOfProduct(new TypeDb(Type.women));
-//        productDb.setTypeOfCollection(Collection.winter);
-//        Bitmap b1 = BitmapFactory.decodeResource(context.getResources(),
-//                R.drawable.szaregtraperki1);
-//        Bitmap b2 = BitmapFactory.decodeResource(context.getResources(),
-//                R.drawable.szaretraperki2);
-//        Bitmap b3 = BitmapFactory.decodeResource(context.getResources(),
-//                R.drawable.szaretraperki3);
-//        Bitmap b4 = BitmapFactory.decodeResource(context.getResources(),
-//                R.drawable.szaretraperki4);
-//        List<Bitmap> bitmaps = new ArrayList<>();
-//        bitmaps.add(b1);
-//        bitmaps.add(b2);
-//        bitmaps.add(b3);
-//        bitmaps.add(b4);
-//        RealmList<byte[]> pictures = DBUtil.transferToByteArray(bitmaps);
-//        productDb.setPictures(pictures);
-//
-//        // Copy to Realm
-//        realm.beginTransaction();
-//        realm.copyToRealm(productDb);
-//        realm.commitTransaction();
-//
-//        //finding
-//        RealmResults<ProductDb> allAsync = realm.where(ProductDb.class).findAllAsync();
-//        allAsync.load();
-//        Log.i("REALM_TEST", "" + allAsync.get(0).toString());
-//
-//        Log.i("REALM_TEST", "" + allAsync.size());
-//    }
 
     public void removeAllProducts() {
         realm.beginTransaction();

@@ -56,6 +56,17 @@ public class Order {
         return this;
     }
 
+    public OrderDb transfer(){
+        OrderDb result = new OrderDb(numberOfOrder,
+                DBUtil.transferFromEnumProductList(products),
+                address,
+                DBUtil.transferToEnum(client),
+                dateOfOrder,
+                DBUtil.transferToEnum(deliveryInformation),
+                DBUtil.transferToEnum(statusOfOrder));
+        return result;
+    }
+
     public Status getStatusOfOrder() {
         return statusOfOrder;
     }

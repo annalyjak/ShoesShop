@@ -7,6 +7,7 @@ import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.anna.shoesshop.MainMenuActivity;
@@ -26,6 +27,7 @@ public class ListCategoriesFragment extends Fragment {
     public static final int KID_LIST = 3;
     private int listVersion;
     private TextView textView1, textView2, textView3;
+    private ImageView imageView1, imageView2, imageView3;
 
     CardView shoesView, clothesView, accessoriesView;
 
@@ -50,7 +52,9 @@ public class ListCategoriesFragment extends Fragment {
         textView1 = view.findViewById(R.id.textView1);
         textView2 = view.findViewById(R.id.textView2);
         textView3 = view.findViewById(R.id.textView3);
-        //TODO change images
+        imageView1 = view.findViewById(R.id.imageView2);
+        imageView2 = view.findViewById(R.id.imageView3);
+        imageView3 = view.findViewById(R.id.imageView4);
 
         setTextViewText();
         setListeners();
@@ -80,6 +84,9 @@ public class ListCategoriesFragment extends Fragment {
                     ((MainMenuActivity) Objects.requireNonNull(getActivity()))
                             .setFragment(CategoriesFragment.newInstance(products));
                 });
+                imageView1.setImageResource(R.drawable.tr5);
+                imageView2.setImageResource(R.drawable.legg4);
+                imageView3.setImageResource(R.drawable.plec);
                 break;
             }
             case MAN_LIST: {
@@ -101,6 +108,9 @@ public class ListCategoriesFragment extends Fragment {
                     ((MainMenuActivity) Objects.requireNonNull(getActivity()))
                             .setFragment(CategoriesFragment.newInstance(products));
                 });
+                imageView1.setImageResource(R.drawable.botm1);
+                imageView2.setImageResource(R.drawable.bluza1);
+                imageView3.setImageResource(R.drawable.torba19);
                 break;
             }
             case KID_LIST: {
@@ -122,6 +132,9 @@ public class ListCategoriesFragment extends Fragment {
                     ((MainMenuActivity) Objects.requireNonNull(getActivity()))
                             .setFragment(CategoriesFragment.newInstance(products));
                 });
+                imageView1.setImageResource(R.drawable.sn2);
+                imageView2.setImageResource(R.drawable.kur6);
+                imageView3.setImageResource(R.drawable.rek24);
                 break;
             }
         }

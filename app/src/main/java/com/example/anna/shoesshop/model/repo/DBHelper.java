@@ -47,4 +47,6 @@ public interface DBHelper {
     public void addProductToFavourites(Product product);
 
     public void removeFromFavourites(Product product);
+
+    public void removeAllProducts();
 }

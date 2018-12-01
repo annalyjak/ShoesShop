@@ -18,16 +18,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 
-import com.example.anna.shoesshop.controller.adapters.OrdersCardAdapter;
+import com.example.anna.shoesshop.controller.adapters.DeliveryAdapter;
+import com.example.anna.shoesshop.controller.fragments.ProductDetailsFragment;
 import com.example.anna.shoesshop.controller.fragments.additional.AboutUsFragment;
 import com.example.anna.shoesshop.controller.fragments.additional.AccountInfoFragment;
+import com.example.anna.shoesshop.controller.fragments.additional.FAQFragment;
 import com.example.anna.shoesshop.controller.fragments.additional.OrdersFragment;
 import com.example.anna.shoesshop.controller.fragments.requirements.BasketFragment;
 import com.example.anna.shoesshop.controller.fragments.requirements.CategoriesFragment;
-import com.example.anna.shoesshop.controller.fragments.additional.FAQFragment;
 import com.example.anna.shoesshop.controller.fragments.requirements.FavouritesFragment;
-import com.example.anna.shoesshop.controller.fragments.ProductDetailsFragment;
-import com.example.anna.shoesshop.controller.adapters.DeliveryAdapter;
 import com.example.anna.shoesshop.controller.fragments.requirements.SearchFragment;
 import com.example.anna.shoesshop.model.product.Product;
 import com.example.anna.shoesshop.model.repo.DBHelper;
@@ -54,10 +53,6 @@ public class MainMenuActivity extends AppCompatActivity
         toolbar.setTitleTextColor(getResources().getColor(R.color.dark));
         setSupportActionBar(toolbar);
 
-//        FloatingActionButton fab = findViewById(R.id.fab);
-//        fab.setOnClickListener(view -> Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                .setAction("Action", null).show());
-
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -77,8 +72,12 @@ public class MainMenuActivity extends AppCompatActivity
         //HERE LOCAL DATABASE INSTRUCTIONS ARE EXECUTED:
         database = new LocalDatabase(getApplicationContext());
         session = new Session(database);
+//        database.removeAllProducts();
 //        LocalDatabase.addProducts(getApplicationContext());
-//        ((LocalDatabase) database).addProducts();
+//        LocalDatabase.addWomanClothes(getApplicationContext());
+//        LocalDatabase.addWomanAccessories(getApplicationContext());
+//        LocalDatabase.addMProcucts(getApplicationContext());
+//        LocalDatabase.addKidProducts(getApplicationContext());
 
     }
 
@@ -120,8 +119,7 @@ public class MainMenuActivity extends AppCompatActivity
 
         if (id == R.id.action_fav) {
             List<Product> list = new ArrayList<>();
-            //TODO downoload from database
-            fragment = FavouritesFragment.newInstance(null);
+            fragment = FavouritesFragment.newInstance(session.getAccount().getFavourites());
             setActuallFragment();
             return true;
         }
@@ -143,19 +141,13 @@ public class MainMenuActivity extends AppCompatActivity
 
         if (id == R.id.nav_home) {
             fragment = SearchFragment.newInstance();
-//            if (productsCache != null) {
-//                fragment = CategoriesFragment.newInstance(productsCache);
-//            } else {
-//                fragment = CategoriesFragment.newInstance();
-//            }
         } else if (id == R.id.nav_orders) {
             fragment = OrdersFragment.newInstance();
         } else if (id == R.id.nav_my_profile) {
             fragment = AccountInfoFragment.newInstance(session.getAccount());
         } else if (id == R.id.nav_fav_prod) {
             List<Product> list = new ArrayList<>();
-            //TODO downoload from database
-            fragment = FavouritesFragment.newInstance(null);
+            fragment = FavouritesFragment.newInstance(session.getAccount().getFavourites());
 
         } else if (id == R.id.nav_delivery) {
             displayDeliveryInfo();
@@ -187,20 +179,12 @@ public class MainMenuActivity extends AppCompatActivity
 
     public void changeViewToProductDetails(Product product) {
         fragment = ProductDetailsFragment.newInstance(product);
-        mFragmentManager
-                .beginTransaction()
-                .replace(R.id.main_frame, fragment)
-                .addToBackStack(null)
-                .commit();
+        setActuallFragmentStack();
     }
 
     public void setBasketView() {
         fragment = BasketFragment.newInstance(session.getOrder());
-        mFragmentManager
-                .beginTransaction()
-                .replace(R.id.main_frame, fragment)
-                .addToBackStack(null)
-                .commit();
+        setActuallFragmentStack();
     }
 
     public void getPreviousFragment() {
@@ -212,7 +196,15 @@ public class MainMenuActivity extends AppCompatActivity
 
     public void setFragment(Fragment fragment) {
         this.fragment = fragment;
-        setActuallFragment();
+        setActuallFragmentStack();
+    }
+
+    private void setActuallFragmentStack() {
+        mFragmentManager
+                .beginTransaction()
+                .replace(R.id.main_frame, fragment)
+                .addToBackStack(null)
+                .commit();
     }
 
     private void setActuallFragment() {
