@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.anna.shoesshop.MainMenuActivity;
 import com.example.anna.shoesshop.R;
 import com.example.anna.shoesshop.controller.adapters.FavouritesCardAdapter;
 import com.example.anna.shoesshop.model.product.Product;
@@ -46,7 +47,7 @@ public class FavouritesFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_favourites, container, false);
         // creating list
         recyclerView = view.findViewById(R.id.order_recycler_view);
-        adapter = new FavouritesCardAdapter(getActivity(), favProducts, this);
+        adapter = new FavouritesCardAdapter((MainMenuActivity) getActivity(), favProducts, this);
         final RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
 
         recyclerView.setLayoutManager(mLayoutManager);

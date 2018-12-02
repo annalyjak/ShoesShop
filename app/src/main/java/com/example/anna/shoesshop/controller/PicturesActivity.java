@@ -15,6 +15,7 @@ import android.widget.ImageView;
 
 import com.example.anna.shoesshop.R;
 import com.example.anna.shoesshop.model.repo.DBUtil;
+import com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,8 +38,11 @@ public class PicturesActivity extends AppCompatActivity {
         ViewPager mViewPager = findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
+        WormDotsIndicator indicator = findViewById(R.id.indicator);
+        indicator.setViewPager(mViewPager);
+
     }
-    //TODO add dots for navigation in ViewPager
+
     /**
      * A placeholder fragment containing a simple view.
      */

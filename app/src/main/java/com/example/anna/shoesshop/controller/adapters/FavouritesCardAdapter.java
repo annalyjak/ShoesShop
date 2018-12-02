@@ -1,9 +1,7 @@
 package com.example.anna.shoesshop.controller.adapters;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
-import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +10,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.anna.shoesshop.MainMenuActivity;
 import com.example.anna.shoesshop.R;
 import com.example.anna.shoesshop.controller.fragments.requirements.FavouritesFragment;
 import com.example.anna.shoesshop.controller.tasks.DeleteProductFromFavTask;
@@ -25,10 +24,10 @@ public class FavouritesCardAdapter extends RecyclerView.Adapter<FavouritesCardAd
     private static final String TAG = FavouritesCardAdapter.class.getSimpleName();
 
     private static List<Product> dataset;
-    private static Activity activity;
+    private static MainMenuActivity activity;
     private FavouritesFragment fragment;
 
-    public FavouritesCardAdapter(FragmentActivity activity,
+    public FavouritesCardAdapter(MainMenuActivity activity,
                                  List<Product> favProducts,
                                  FavouritesFragment fragment) {
         this.activity =activity;
@@ -42,7 +41,6 @@ public class FavouritesCardAdapter extends RecyclerView.Adapter<FavouritesCardAd
                 parent.getContext()).inflate(R.layout.card_fav_products, parent, false);
         return new ViewHolder(v, parent.getContext());
     }
-    //TODO add on card click action -> open details
     //TODO add action addToBasket in fav
     @Override
     public void onBindViewHolder(final FavouritesCardAdapter.ViewHolder holder, int position) {
@@ -91,6 +89,10 @@ public class FavouritesCardAdapter extends RecyclerView.Adapter<FavouritesCardAd
         return dataset.isEmpty();
     }
 
+    private Product getActualProduct(int position) {
+        return dataset.get(position);
+    }
+
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         public int position;
@@ -110,6 +112,9 @@ public class FavouritesCardAdapter extends RecyclerView.Adapter<FavouritesCardAd
             deleteButton = v.findViewById(R.id.imageDelete);
 
             deleteButton.setOnClickListener(view -> adapter.removeProductFromFavourites(position));
+            //TODO add on card click action -> open details
+//            v.setOnClickListener(view -> activity.changeViewToProductDetails(
+//                    adapter.getActualProduct(position)));
         }
     }
 
