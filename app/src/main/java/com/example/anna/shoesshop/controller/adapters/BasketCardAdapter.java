@@ -2,7 +2,6 @@ package com.example.anna.shoesshop.controller.adapters;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.res.Resources;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.RecyclerView;
@@ -47,7 +46,6 @@ public class BasketCardAdapter extends RecyclerView.Adapter<BasketCardAdapter.Vi
     @Override
     public void onBindViewHolder(@NonNull final BasketCardAdapter.ViewHolder holder, int position) {
         Product product = dataset.get(position);
-        Resources resources = activity.getApplicationContext().getResources();
 
         holder.position = position;
         holder.name.setText(product.getName());
@@ -87,10 +85,11 @@ public class BasketCardAdapter extends RecyclerView.Adapter<BasketCardAdapter.Vi
                 .setPositiveButton("OK", (dialog, id) -> dialog.cancel())
                 .show();
         this.notifyDataSetChanged();
-    }
+        fragment.setPriceTextView();
 
-    public boolean hasEmptyList() {
-        return dataset.isEmpty();
+        if(dataset.isEmpty()) {
+            fragment.setNoProducts();
+        }
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {

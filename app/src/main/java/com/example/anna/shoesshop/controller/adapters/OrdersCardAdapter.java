@@ -10,8 +10,10 @@ import android.widget.TextView;
 import com.example.anna.shoesshop.R;
 import com.example.anna.shoesshop.model.order.Order;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class OrdersCardAdapter extends RecyclerView.Adapter<OrdersCardAdapter.ViewHolder> {
 
@@ -33,9 +35,11 @@ public class OrdersCardAdapter extends RecyclerView.Adapter<OrdersCardAdapter.Vi
     public void onBindViewHolder(@NonNull final OrdersCardAdapter.ViewHolder holder, int position) {
         Order order = dataset.get(holder.getAdapterPosition());
 
+        SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy, HH:mm", Locale.ROOT);
+        String date = format.format(order.getDateOfOrder());
+
         holder.position = holder.getAdapterPosition();
-        holder.orderId.setText(
-                String.format("Zamówienie %s", order.getDateOfOrder()));
+        holder.orderId.setText(String.format("Zamówienie %s", date));
         holder.orderStatus.setText(order.getStatusOfOrder().toString());
         holder.orderProductsPrice.setText(
                 String.format("Cena zamówienia: %s", order.getTotalPriceOfOrder()));

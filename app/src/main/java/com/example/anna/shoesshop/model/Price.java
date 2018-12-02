@@ -8,7 +8,7 @@ import static java.lang.String.format;
 
 public class Price extends RealmObject {
     private double normalPrice;
-    private double actuallPrice;
+    private double actuallPrice; //Only one needed
     private String currency;
 
     public Price() {

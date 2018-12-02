@@ -42,7 +42,8 @@ public class FavouritesCardAdapter extends RecyclerView.Adapter<FavouritesCardAd
                 parent.getContext()).inflate(R.layout.card_fav_products, parent, false);
         return new ViewHolder(v, parent.getContext());
     }
-
+    //TODO add on card click action -> open details
+    //TODO add action addToBasket in fav
     @Override
     public void onBindViewHolder(final FavouritesCardAdapter.ViewHolder holder, int position) {
         Product product = dataset.get(position);

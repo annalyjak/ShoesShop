@@ -38,7 +38,7 @@ public class PicturesActivity extends AppCompatActivity {
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
     }
-
+    //TODO add dots for navigation in ViewPager
     /**
      * A placeholder fragment containing a simple view.
      */
