@@ -50,18 +50,6 @@
                 app:layout_constraintVertical_bias="0.0"
                 app:srcCompat="@drawable/shoes_pion" />
 
-            <Button
-                android:id="@+id/button"
-                style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:text="+ DODAJ DO KOSZYKA"
-                android:textAppearance="@style/TextAppearance.AppCompat"
-                app:layout_constraintStart_toEndOf="@+id/categ_imageView"
-                app:layout_constraintTop_toBottomOf="@+id/name_categ_prod" />
-
             <TextView
                 android:id="@+id/categ_actuall_price"
                 android:layout_width="wrap_content"
@@ -98,6 +86,16 @@
                 android:textSize="18sp"
                 app:layout_constraintStart_toEndOf="@+id/categ_imageView"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textViewCollection"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Kolekcja: "
+                android:textColor="@color/color5"
+                app:layout_constraintStart_toStartOf="@+id/name_categ_prod"
+                app:layout_constraintTop_toBottomOf="@+id/name_categ_prod" />
 
         </android.support.constraint.ConstraintLayout>
     </android.support.v7.widget.CardView>

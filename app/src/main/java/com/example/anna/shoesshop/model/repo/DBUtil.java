@@ -168,6 +168,23 @@ public class DBUtil {
         return Size.universal;
     }
 
+    public static String collectionToString(Collection collection) {
+        String result = "Kolekcja ";
+        if (collection == Collection.summer) {
+            return result + "letnia";
+        }
+        if (collection == Collection.winter) {
+            return result + "zimowa";
+        }
+        if (collection == Collection.spring) {
+            return result + "wiosenna";
+        }
+        if (collection == Collection.autumn) {
+            return result + "jesienna";
+        }
+        return result + "ogólna";
+    }
+
     public static Collection transferToEnum(CollectionDb typeOfCollection) {
         if(typeOfCollection == null) {
             return Collection.spring;

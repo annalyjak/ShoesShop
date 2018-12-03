@@ -15,6 +15,7 @@ import com.example.anna.shoesshop.R;
 import com.example.anna.shoesshop.controller.fragments.requirements.FavouritesFragment;
 import com.example.anna.shoesshop.controller.tasks.DeleteProductFromFavTask;
 import com.example.anna.shoesshop.model.product.Product;
+import com.example.anna.shoesshop.model.repo.DBUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,7 +42,7 @@ public class FavouritesCardAdapter extends RecyclerView.Adapter<FavouritesCardAd
                 parent.getContext()).inflate(R.layout.card_fav_products, parent, false);
         return new ViewHolder(v, parent.getContext());
     }
-    //TODO add action addToBasket in fav
+
     @Override
     public void onBindViewHolder(final FavouritesCardAdapter.ViewHolder holder, int position) {
         Product product = dataset.get(position);
@@ -58,6 +59,7 @@ public class FavouritesCardAdapter extends RecyclerView.Adapter<FavouritesCardAd
         }
         holder.priceNormal.setText(product.getPrice().toString());
         holder.picture.setImageBitmap(product.getMainPicture());
+        holder.collection.setText(DBUtil.collectionToString(product.getTypeOfCollection()));
         holder.adapter = this;
 
     }
@@ -96,7 +98,7 @@ public class FavouritesCardAdapter extends RecyclerView.Adapter<FavouritesCardAd
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         public int position;
-        public TextView name, priceActuall, priceNormal;
+        public TextView name, priceActuall, priceNormal, collection;
         public ImageView picture;
         public ImageButton deleteButton;
         private Context context;
@@ -110,6 +112,7 @@ public class FavouritesCardAdapter extends RecyclerView.Adapter<FavouritesCardAd
             priceNormal = v.findViewById(R.id.fav_normal_price);
             picture = v.findViewById(R.id.categ_imageView);
             deleteButton = v.findViewById(R.id.imageDelete);
+            collection = v.findViewById(R.id.textViewCollection);
 
             deleteButton.setOnClickListener(view -> adapter.removeProductFromFavourites(position));
             //TODO add on card click action -> open details
