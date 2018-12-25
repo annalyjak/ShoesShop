@@ -16,6 +16,7 @@ import com.example.anna.shoesshop.model.product.Category;
 import com.example.anna.shoesshop.model.product.Product;
 import com.example.anna.shoesshop.model.product.Type;
 import com.example.anna.shoesshop.model.repo.LocalDatabase;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 import java.util.Objects;
@@ -62,6 +63,15 @@ public class ListCategoriesFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+
+        imageView1.setImageDrawable(null);
+        imageView2.setImageDrawable(null);
+        imageView3.setImageDrawable(null);
+    }
+
     private void setListeners() {
         LocalDatabase localDatabase = new LocalDatabase(getContext());
         switch (listVersion) {
@@ -84,9 +94,9 @@ public class ListCategoriesFragment extends Fragment {
                     ((MainMenuActivity) Objects.requireNonNull(getActivity()))
                             .setFragment(CategoriesFragment.newInstance(products));
                 });
-                imageView1.setImageResource(R.drawable.tr5);
-                imageView2.setImageResource(R.drawable.legg4);
-                imageView3.setImageResource(R.drawable.plec);
+                Picasso.get().load(R.drawable.womans).into(imageView1);
+                Picasso.get().load(R.drawable.womanc).into(imageView2);
+                Picasso.get().load(R.drawable.womanc).into(imageView3);
                 break;
             }
             case MAN_LIST: {
@@ -108,9 +118,9 @@ public class ListCategoriesFragment extends Fragment {
                     ((MainMenuActivity) Objects.requireNonNull(getActivity()))
                             .setFragment(CategoriesFragment.newInstance(products));
                 });
-                imageView1.setImageResource(R.drawable.botm1);
-                imageView2.setImageResource(R.drawable.bluza1);
-                imageView3.setImageResource(R.drawable.torba19);
+                Picasso.get().load(R.drawable.mens).into(imageView1);
+                Picasso.get().load(R.drawable.menc).into(imageView2);
+                Picasso.get().load(R.drawable.mena).into(imageView3);
                 break;
             }
             case KID_LIST: {
@@ -132,9 +142,9 @@ public class ListCategoriesFragment extends Fragment {
                     ((MainMenuActivity) Objects.requireNonNull(getActivity()))
                             .setFragment(CategoriesFragment.newInstance(products));
                 });
-                imageView1.setImageResource(R.drawable.sn2);
-                imageView2.setImageResource(R.drawable.kur6);
-                imageView3.setImageResource(R.drawable.rek24);
+                Picasso.get().load(R.drawable.kids).into(imageView1);
+                Picasso.get().load(R.drawable.kidc).into(imageView2);
+                Picasso.get().load(R.drawable.kida).into(imageView3);
                 break;
             }
         }

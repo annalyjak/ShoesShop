@@ -32,6 +32,9 @@ public class FavouritesFragment extends Fragment {
     public static FavouritesFragment newInstance(List<Product> products) {
         FavouritesFragment fragment = new FavouritesFragment();
         fragment.favProducts = products;
+        if(products != null) {
+            Log.i("TAG", "Przekazano listę produktów: " + products.size());
+        }
         return fragment;
     }
 
@@ -57,7 +60,9 @@ public class FavouritesFragment extends Fragment {
         layoutNoRav = view.findViewById(R.id.no_fav_prod);
         setFavView();
 
-        getProductsFromDatabase();
+        if (favProducts == null && favProducts.isEmpty()) {
+            getProductsFromDatabase();
+        }
         return view;
     }
 

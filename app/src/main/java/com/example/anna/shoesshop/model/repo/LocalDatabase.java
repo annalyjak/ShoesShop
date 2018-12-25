@@ -1,15 +1,11 @@
 package com.example.anna.shoesshop.model.repo;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.PorterDuff;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.util.AsyncListUtil;
 import android.util.Log;
 
-import com.example.anna.shoesshop.MainMenuActivity;
 import com.example.anna.shoesshop.R;
 import com.example.anna.shoesshop.model.Address;
 import com.example.anna.shoesshop.model.database.AccountDb;
@@ -169,7 +165,7 @@ public class LocalDatabase implements DBHelper {
     }
 
     @Override
-    public void addProductToFavourites(Product product) {
+    public boolean addProductToFavourites(Product product) {
         Account loggedAccount = getLoggedAccount();
         loggedAccount.addProductToFavourites(product);
 
@@ -181,9 +177,9 @@ public class LocalDatabase implements DBHelper {
             all.addProductToFavourites(productDb);
             realm.commitTransaction();
             realm.close();
-//            showAlert("Dodano " + product.getName() + " do ulubionych");
+            return true;
         } else {
-//            showAlert("Ten produkt jest już ulubiony!");
+            return false;
         }
     }
 

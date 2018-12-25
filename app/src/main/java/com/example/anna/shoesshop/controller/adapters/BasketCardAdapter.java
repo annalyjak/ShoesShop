@@ -52,6 +52,7 @@ public class BasketCardAdapter extends RecyclerView.Adapter<BasketCardAdapter.Vi
         holder.priceActuall.setText(product.getNormalPrice().toString());
         holder.textViewSize.setText(
                 String.format("Rozmiar: %s", product.getSelectedSize().toString()));
+//        Picasso.get().load(product.getMainPicture())
         holder.picture.setImageBitmap(product.getMainPicture());
         holder.adapter = this;
 
