@@ -2,6 +2,7 @@ package com.example.anna.shoesshop.model.repo;
 
 import com.example.anna.shoesshop.model.product.Product;
 import com.example.anna.shoesshop.model.userInfo.Account;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,10 +11,17 @@ public class Session {
     private Account account;
     private List<Product> order;
     private static List<Product> productsCache;
+    private FirebaseUser currentUser;
+    private boolean sessionUsingFirebase = false;
 
     public Session(DBHelper helper) {
         account = helper.getLoggedAccount();
         order = new ArrayList<>();
+    }
+
+    public Session(FirebaseUser user) {
+        currentUser = user;
+        sessionUsingFirebase = true;
     }
 
     public void addProductToOrder(Product product) {

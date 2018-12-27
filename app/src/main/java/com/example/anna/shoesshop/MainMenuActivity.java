@@ -23,6 +23,7 @@ import com.example.anna.shoesshop.controller.fragments.ProductDetailsFragment;
 import com.example.anna.shoesshop.controller.fragments.additional.AboutUsFragment;
 import com.example.anna.shoesshop.controller.fragments.additional.AccountInfoFragment;
 import com.example.anna.shoesshop.controller.fragments.additional.FAQFragment;
+import com.example.anna.shoesshop.controller.fragments.additional.authentication.LoginFragment;
 import com.example.anna.shoesshop.controller.fragments.additional.OrdersFragment;
 import com.example.anna.shoesshop.controller.fragments.requirements.BasketFragment;
 import com.example.anna.shoesshop.controller.fragments.requirements.CategoriesFragment;
@@ -32,6 +33,8 @@ import com.example.anna.shoesshop.model.product.Product;
 import com.example.anna.shoesshop.model.repo.DBHelper;
 import com.example.anna.shoesshop.model.repo.LocalDatabase;
 import com.example.anna.shoesshop.model.repo.Session;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -157,6 +160,9 @@ public class MainMenuActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_about_us) {
             fragment = AboutUsFragment.newInstance();
+        } else if (id == R.id.nav_auth) {
+            fragment = LoginFragment.newInstance();
+//            startActivity(new Intent(MainMenuActivity.this, SignInActivity.class));
         }
 
         mFragmentManager
@@ -262,4 +268,8 @@ public class MainMenuActivity extends AppCompatActivity
     /*
      * End of FAQ handlers
      */
+
+    public FirebaseUser getUid() {
+        return FirebaseAuth.getInstance().getCurrentUser();
+    }
 }

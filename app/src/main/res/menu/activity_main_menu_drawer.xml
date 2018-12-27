@@ -39,4 +39,14 @@
         </menu>
     </item>
 
+    <item android:title="Autoryzacja">
+        <menu>
+            <item
+                android:id="@+id/nav_auth"
+                android:icon="@drawable/ic_account_circle_black_24dp"
+                android:title="Logowanie i rejestracja"
+                />
+        </menu>
+    </item>
+
 </menu>
